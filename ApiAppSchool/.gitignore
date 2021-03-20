@@ -10,6 +10,8 @@ media
 *.bak 
 
 # If you are using PyCharm # 
+.idea/
+../ApiRest/Ecole/__pycache__
 .idea/**/workspace.xml 
 .idea/**/tasks.xml 
 .idea/dictionaries 
