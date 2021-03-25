@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'ApiRest.Ecole',
     'ApiRest.Administrateurs',
+    'ApiRest.Classe',
 ]
 
 MIDDLEWARE = [
