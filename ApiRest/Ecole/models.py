@@ -124,7 +124,6 @@ class PrimaireSite1(models.Model):
 
 
 class PrimaireSite2(models.Model):
-    print("On est dans le if cycle='primaire' du Site 2")
     nbreSalles = models.IntegerField(default=6, null=False)
     sallesCP1 = models.IntegerField(default=1, null=False)
     sallesCP2 = models.IntegerField(default=1, null=False)

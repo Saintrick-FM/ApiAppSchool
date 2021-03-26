@@ -40,9 +40,13 @@ INSTALLED_APPS = [
 
     'rest_framework',
 
-    'ApiRest.Ecole',
     'ApiRest.Administrateurs',
     'ApiRest.Classe',
+    'ApiRest.Ecole',
+    'ApiRest.Finances',
+    'ApiRest.GRH',
+    'ApiRest.Inscriptions',
+    'ApiRest.Pedagogie',
 ]
 
 MIDDLEWARE = [

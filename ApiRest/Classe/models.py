@@ -3,9 +3,19 @@ from ApiRest.Ecole import models as modelEcole
 
 
 # Create your models here.
+SCOLARITE = (
+    ('5.000f', '5.000 FCFA'),
+    ('7000f', '7000 FCFA'),
+    ('8000f', '8000 FCFA'),
+    ('9000f', '9000 FCFA'),
+    ('10000f', '10000 FCFA'),
+    ('12000f', '12000 FCFA')
+)
 
 
 class AbstractClasse(models.Model):
+    identifiant = models.CharField(primary_key=True, unique=True, help_text='taper la salle Ex: 3e',
+                                   max_length=50)
     referenceSite = models.ForeignKey(modelEcole.Site, on_delete=models.CASCADE)
     heuresCours = models.CharField(default="7h30-13h", max_length=100)
     nbreEleves = models.IntegerField(null=False)
@@ -18,100 +28,16 @@ class AbstractClasse(models.Model):
     nouveaux = models.IntegerField(default=0, null=False)
     elevesVenuDailleurs = models.IntegerField(default=0, null=False)
     inscrits = models.IntegerField(null=False)
+    scolarite= models.CharField(choices=SCOLARITE, default='', null=False, max_length=50)
+
+    def __str__(self):
+        return 'Classe {}'.format(self.identifiant)
 
     class Meta:
         abstract = True
 
 
 class Classe(AbstractClasse, models.Model):
-    def __str__(self):
-        return 'Classe {}'.format(self.identifiant)
-
-
-class Creche(models.Model):
-    identifiant = models.CharField(default='Crèche', max_length=50)
-    nbreEleves = models.IntegerField(null=False)
-    nbreSalles = models.IntegerField(default=1, null=False)
-    contenance = models.IntegerField(null=False)
-    totalFilles = models.IntegerField(null=False)
-    totalGarcons = models.IntegerField(null=False)
-
-    class Meta:
-        verbose_name = 'Crèche'
-
-    def __str__(self):
-        return 'Classe {}'.format(self.identifiant)
-
-
-class CP1(AbstractClasse, models.Model):
-    identifiant = models.CharField(default='CP1', max_length=50)
-
-    def __str__(self):
-        return 'Classe {}'.format(self.identifiant)
-
-
-class CP2(AbstractClasse, models.Model):
-    identifiant = models.CharField(default='CP2', max_length=50)
-
-    def __str__(self):
-        return 'Classe {}'.format(self.identifiant)
-
-
-class CE1(AbstractClasse, models.Model):
-    identifiant = models.CharField(default='CE1', max_length=50)
-
-    def __str__(self):
-        return 'Classe {}'.format(self.identifiant)
-
-
-class CE2(AbstractClasse, models.Model):
-    identifiant = models.CharField(default='CE2', max_length=50)
-
-    def __str__(self):
-        return 'Classe {}'.format(self.identifiant)
-
-
-class CM1(AbstractClasse, models.Model):
-    identifiant = models.CharField(default='CM1', max_length=50)
-
-    def __str__(self):
-        return 'Classe {}'.format(self.identifiant)
-
-
-class CM2(AbstractClasse, models.Model):
-    identifiant = models.CharField(default='CM2', max_length=50)
-
-    def __str__(self):
-        return 'Classe {}'.format(self.identifiant)
-
-
-class Sixieme(AbstractClasse, models.Model):
-    identifiant = models.CharField(default='6e', max_length=50)
-
-    def __str__(self):
-        return 'Classe {}'.format(self.identifiant)
-
-    class Meta:
-        verbose_name = '6e'
-
-
-class Cinquieme(AbstractClasse, models.Model):
-    identifiant = models.CharField(default='CP2', max_length=50)
-
-    def __str__(self):
-        return 'Classe {}'.format(self.identifiant)
-
-
-class Quatrieme(AbstractClasse, models.Model):
-    identifiant = models.CharField(default='CP2', max_length=50)
-
-    def __str__(self):
-        return 'Classe {}'.format(self.identifiant)
-
-
-class Troisieme(AbstractClasse, models.Model):
-    identifiant = models.CharField(default='CP2', max_length=50)
-
     def __str__(self):
         return 'Classe {}'.format(self.identifiant)
 
