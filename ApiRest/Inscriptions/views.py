@@ -1,16 +1,17 @@
-from django.shortcuts import render
+from ApiRest.Classe.models import Classe
 from .models import Eleve
 from rest_framework import serializers, viewsets
 
 
 # Create your views here.
 
-
 class EleveSerializer(serializers.HyperlinkedModelSerializer):
-    classeEleve= serializers.ReadOnlyField(source='classEleve')
+    classe= serializers.PrimaryKeyRelatedField(queryset=Classe.objects.all())
+
     class Meta:
         model = Eleve
-        fields = ['url', 'nom', 'sexe', 'naissance', 'age', 'lieuNaiss', 'classeEleve', 'dateInscrit']
+        fields = ['url', 'eleveNumber', 'nom', 'sexe', 'naissance', 'age', 'lieuNaiss', 'classe', 'dateInscrit']
+        read_only_fields= ['classe']
 
 
 class EleveViewset(viewsets.ModelViewSet):

@@ -14,7 +14,8 @@ class Eleve(models.Model):
 
     age = lambda today, yearBirth=1995: f'{today - yearBirth} ans'
 
-    nom = models.CharField(max_length=255, unique=True, help_text="Tapez tous les noms et prénoms", null=False)
+    eleveNumber= models.IntegerField(auto_created=True, default=1, db_column='n°', verbose_name='n°:')
+    nom = models.CharField(primary_key=True, max_length=255, help_text="Tapez tous les noms et prénoms", null=False)
     sexe = models.CharField(choices=SEXE, max_length=255, default='', null=False)
     naissance = models.DateField(auto_now_add=True, null=False)
     age = models.CharField(max_length=20, default=age(anneeActuelle))
@@ -24,4 +25,4 @@ class Eleve(models.Model):
     scolarite= models.CharField(max_length=50, default='', editable=False)
 
     def __str__(self):
-        return f'{self.nom} {self.prenoms} '
+        return f'{self.nom}'

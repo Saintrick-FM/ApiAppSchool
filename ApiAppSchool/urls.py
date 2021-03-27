@@ -20,5 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('ApiRest.Administrateurs.urls')),
-    path('', include('ApiRest.Inscriptions.urls'))
+    path('', include('ApiRest.Inscriptions.urls')),
+    path('', include('ApiRest.Classe.urls'))
 ]
