@@ -11,13 +11,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a5a19fa-79cd-4ef7-975c-388fe9da8291" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Classe/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiAppSchool/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiAppSchool/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ApiRest/Administrateurs/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Administrateurs/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Classe/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Classe/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ApiRest/Classe/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ApiRest/Classe/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Classe/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Ecole/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/migrations/0002_auto_20210326_2000.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/migrations/0003_auto_20210327_0845.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Inscriptions/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Inscriptions/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Inscriptions/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../db.sqlite3" afterDir="false" />
     </list>

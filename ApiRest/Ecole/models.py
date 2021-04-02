@@ -141,3 +141,4 @@ class PrimaireSite2(models.Model):
     matieres = models.TextField(
         default='{}  --  {}  --  {}'.format(MATIERE_LITTERAIRES[0][0], MATIERE_SCIENTIFIQUES[0][0],
                                             AUTRES_MATIERES[0][0]))
+

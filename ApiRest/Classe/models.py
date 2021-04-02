@@ -3,15 +3,6 @@ from ApiRest.Ecole import models as modelEcole
 
 
 # Create your models here.
-SCOLARITE = (
-    ('5.000f', '5.000 FCFA'),
-    ('7000f', '7000 FCFA'),
-    ('8000f', '8000 FCFA'),
-    ('9000f', '9000 FCFA'),
-    ('10000f', '10000 FCFA'),
-    ('12000f', '12000 FCFA')
-)
-
 
 class AbstractClasse(models.Model):
     identifiant = models.CharField(primary_key=True, unique=True, help_text='taper la salle Ex: 3e',
@@ -28,7 +19,7 @@ class AbstractClasse(models.Model):
     nouveaux = models.IntegerField(default=0, null=False)
     elevesVenuDailleurs = models.IntegerField(default=0, null=False)
     inscrits = models.IntegerField(null=False)
-    scolarite= models.CharField(choices=SCOLARITE, default='', null=False, max_length=50)
+    scolarite= models.CharField(help_text="Frais à payer mensuellement Eg: 8000F", null=False, max_length=50)
 
     def __str__(self):
         return 'Classe {}'.format(self.identifiant)

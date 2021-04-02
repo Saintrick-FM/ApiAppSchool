@@ -1,10 +1,26 @@
-# from django.shortcuts import render
-# from rest_framework import routers, serializers, viewsets
-
-# Create your views here.
-# ViewSets define the view behavior.
+from rest_framework import viewsets
+from rest_framework import serializers
+from .models import Ecole, Site
 
 
-# class UserViewSet(viewsets.ModelViewSet):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
+class EcoleSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Ecole
+        fields = '__all__'
+
+
+class SiteSerializer(serializers.HyperlinkedModelSerializer):
+    classe
+    class Meta:
+        model = Site
+        fields = '__all__'
+
+
+class EcoleViewSet(viewsets.ModelViewSet):
+    queryset = Ecole.objects.all()
+    serializer_class = EcoleSerializer
+
+
+class SiteViewSet(viewsets.ModelViewSet):
+    queryset = Site.objects.all()
+    serializer_class = SiteSerializer
