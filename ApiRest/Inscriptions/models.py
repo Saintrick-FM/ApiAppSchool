@@ -20,8 +20,8 @@ STATUT = (
 
 class Eleve(models.Model):
 
-    eleveNumber = models.AutoField(
-        primary_key=True, auto_created=True, db_column='n°', verbose_name='n°:')
+    eleveNumber = models.AutoField('n°:',
+                                   primary_key=True, auto_created=True, db_column='n°')
     nom = models.CharField(unique=True, max_length=255,
                            help_text="Tapez tous les noms et prénoms", null=False)
     sexe = models.CharField(

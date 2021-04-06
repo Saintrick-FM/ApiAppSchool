@@ -68,6 +68,11 @@ AUTRES_MATIERES = [
     # {'Lycee': 'EPS, Informatique'}
 ]
 
+CATEGORIE_ENSEIGNANT = (
+    ('Primaire', 'Primaire'),
+    ('College', 'College')
+)
+
 # Create your models here.
 
 
@@ -196,6 +201,8 @@ class Enseignant(models.Model):
         max_length=250, unique=True, blank=True, null=True)
     numero_cnss = models.CharField('mode de paiement',
                                    max_length=100, unique=True, blank=True, null=True)
+    category = models.CharField(
+        "Catégorie d'employé", max_length=30, default=CATEGORIE_ENSEIGNANT[1], choices=CATEGORIE_ENSEIGNANT, null=False)
     cree_le = models.DateTimeField(
         auto_now_add=True, editable=False, verbose_name='créé_le')
     modifie_at = models.DateTimeField(
