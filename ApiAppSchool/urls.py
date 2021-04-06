@@ -21,6 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('ApiRest.Administrateurs.urls')),
     path('', include('ApiRest.Inscriptions.urls')),
-    path('', include('ApiRest.Classe.urls')),
-    path('ecole/', include('ApiRest.Ecole.urls'))
+    path('', include('ApiRest.Ecole.urls'))
 ]

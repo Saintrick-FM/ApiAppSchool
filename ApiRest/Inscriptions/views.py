@@ -1,5 +1,5 @@
 from datetime import date
-from ApiRest.Classe.models import Classe
+from ApiRest.Ecole.models import Classe
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Eleve
@@ -13,8 +13,7 @@ class EleveSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Eleve
-        fields = ['eleveNumber', 'nom', 'sexe', 'naissance',
-                  'age', 'lieuNaiss', 'dateInscrit', 'classe']
+        fields = '__all__'
         # read_only_fields = ['sexe', 'age']
 
 
@@ -40,4 +39,3 @@ class EleveViewset(viewsets.ModelViewSet):
             return False
 
 """
-course = 'francy'

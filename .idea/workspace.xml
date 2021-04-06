@@ -13,8 +13,6 @@
     <list default="true" id="6a5a19fa-79cd-4ef7-975c-388fe9da8291" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ApiRest/Administrateurs/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Administrateurs/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Classe/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Classe/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Classe/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0001_initial.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Ecole/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/migrations/0001_initial.py" beforeDir="false" />

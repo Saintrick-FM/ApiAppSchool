@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'ApiRest.Administrateurs',
-    'ApiRest.Classe',
     'ApiRest.Ecole',
     'ApiRest.Finances',
     'ApiRest.GRH',
