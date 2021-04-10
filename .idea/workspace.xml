@@ -12,14 +12,12 @@
   <component name="ChangeListManager">
     <list default="true" id="6a5a19fa-79cd-4ef7-975c-388fe9da8291" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Administrateurs/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Administrateurs/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0001_initial.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Ecole/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/migrations/0002_auto_20210326_2000.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/migrations/0003_auto_20210327_0845.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Inscriptions/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Inscriptions/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ApiRest/Finances/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Finances/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ApiRest/Pedagogie/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Pedagogie/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ApiRest/Pedagogie/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Pedagogie/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ApiRest/Pedagogie/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Pedagogie/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ApiRest/Pedagogie/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Pedagogie/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -145,9 +143,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1615475345386" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1616767830098">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1618045953410">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1616767830098" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1618045953410" />
   </component>
 </project>

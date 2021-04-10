@@ -1,7 +1,7 @@
 from django.db import models
 from ApiRest.Utils.models import TimeStamp
 from ApiRest.Inscriptions.models import Eleve
-from ApiRest.Ecole.models import Enseignant
+from ApiRest.Ecole.models import Enseignant, Classe
 from ApiRest.GRH.models import Personnel
 CATEGORIE_ENSEIGNANT = (
     ('Primaire', 'Enseigne au Primaire'),
@@ -67,6 +67,8 @@ class ConfigurationSalaireEnseignant(TimeStamp):
 class PaiementFrais(TimeStamp):
     eleve = models.ForeignKey(
         Eleve, on_delete=models.DO_NOTHING, related_name='eleve_payant')
+    classe = models.ForeignKey(
+        Classe, related_name='classe_eleve', default='', on_delete=models.DO_NOTHING)
     type_frais = models.ForeignKey(
         ConfigurationFraisEleve, on_delete=models.DO_NOTHING, verbose_name='Type de frais A payer', related_name='type_frais')
     montant_frais = models.ForeignKey(ConfigurationFraisEleve, on_delete=models.DO_NOTHING, editable=False,

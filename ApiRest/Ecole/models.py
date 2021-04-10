@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 
 CYCLE = (
     ('Garderie', 'Garderie'),
@@ -120,6 +121,12 @@ class Cycle(models.Model):
 
 
 class Classe(models.Model):
+
+    now = date.today()
+
+    def anneeAcademique(annee=now):
+        return f'{annee.strftime("%Y")}-{int(annee.strftime("%Y"))+1}'
+
     identifiant = models.CharField(
         primary_key=True, choices=IDENTIFIANT_CLASSE, max_length=50)
     reference_site = models.ManyToManyField(
@@ -143,6 +150,8 @@ class Classe(models.Model):
         help_text="Frais à payer mensuellement Eg: 8000F", null=False, max_length=50)
     cycle = models.ForeignKey(
         Cycle, on_delete=models.CASCADE, related_name='classe_cycle')
+    annee_academique = models.CharField(
+        'Année académique :', max_length=50, default=anneeAcademique, editable=False)
 
     def __str__(self):
         return 'Classe {}'.format(self.identifiant)
