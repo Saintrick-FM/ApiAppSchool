@@ -12,11 +12,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6a5a19fa-79cd-4ef7-975c-388fe9da8291" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Ecole/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Finances/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Finances/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Pedagogie/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Pedagogie/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Pedagogie/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Pedagogie/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Pedagogie/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Pedagogie/tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ApiRest/Pedagogie/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Pedagogie/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../db.sqlite3" afterDir="false" />
     </list>
