@@ -4,6 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Eleve
 from rest_framework import serializers, viewsets, status
+from rest_framework import permissions
 
 
 # Create your views here.
@@ -20,6 +21,7 @@ class EleveSerializer(serializers.HyperlinkedModelSerializer):
 class EleveViewset(viewsets.ModelViewSet):
     queryset = Eleve.objects.all()
     serializer_class = EleveSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
 """

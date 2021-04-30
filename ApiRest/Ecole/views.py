@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 from rest_framework import serializers
 from .models import Ecole, Site, Classe, Matiere, Enseignant
+from rest_framework import permissions
 
 
 class EcoleSerializer(serializers.HyperlinkedModelSerializer):
@@ -56,3 +57,4 @@ class MatiereSerializer(serializers.HyperlinkedModelSerializer):
 class MatiereViewSet(viewsets.ModelViewSet):
     queryset = Matiere.objects.all()
     serializer_class = MatiereSerializer
+    permission_classes = [permissions.IsAuthenticated]

@@ -1,16 +1,24 @@
 from ApiRest.Administrateurs.serializer import UserSerializer
 from django.contrib.auth.models import User
-from django.http import Http404
-from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
-from rest_framework.response import Response
-# from rest_framework.views import APIView
-from rest_framework import status, viewsets
+from rest_framework import viewsets
+from rest_framework import permissions
+from .permissions import IsOwnerUserOrListOnly
 
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def get_permissions(self):
+        if self.action == 'list':
+            permission_classes = [permissions.IsAuthenticated]
+        elif self.action == 'post':
+            permission_classes = [permissions.AllowAny]
+        else:
+            permission_classes = [permissions.IsAdminUser]
+        return [permission() for permission in permission_classes]
+
 
 # class UserView(APIView):
 #     queryset = User.objects.all()

@@ -14,15 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from ApiRest.Administrateurs import views
-from ApiRest.Inscriptions import views as inscViews
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
+
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
-router.register(r'users', views.UserViewSet)
+router.register(r'', views.UserViewSet)
 # router.register(r'inscriptions', inscViews.EleveViewset)
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
     path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls')) #ajoute le login sur la page
 ]
