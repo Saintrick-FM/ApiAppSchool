@@ -12,7 +12,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.action == 'list':
-            permission_classes = [permissions.IsAuthenticated]
+            permission_classes = [permissions.AllowAny]
         elif self.action == 'post':
             permission_classes = [permissions.AllowAny]
         else:

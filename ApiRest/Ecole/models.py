@@ -8,7 +8,14 @@ CYCLE = (
     ('College', 'College')
 
 )
-
+MATIERE_DE_BASE = (
+    ('Non', 'Non'),
+    ('Oui', 'Oui'),
+)
+PLURIPROF = (
+    ('Non', 'Non'),
+    ('Oui', 'Oui'),
+)
 IDENTIFIANT_CLASSE = (
     ('Crèche', 'Crèche'),
     ('P1', 'P1'),
@@ -79,14 +86,15 @@ CATEGORIE_ENSEIGNANT = (
 
 class Ecole(models.Model):
     nom = models.CharField(max_length=200, null=False)
-    nbreSites = models.IntegerField(null=False, default=2)
+    nbreSites = models.IntegerField('Nbre de sites', null=False, default=2)
     pays = models.CharField(max_length=100, null=False)
     ville = models.CharField(max_length=200, null=False)
     adresse = models.CharField(max_length=200, null=False)
     telephone = models.CharField(max_length=200, null=False)
     email = models.EmailField(null=True, blank=True)
-    siteInternet = models.CharField(null=True, max_length=200)
-    prefixmatricule = models.CharField(max_length=200, null=False)
+    siteInternet = models.CharField('Site internet', null=True, max_length=200)
+    prefixmatricule = models.CharField(
+        'Préfix matricule', max_length=200, null=False)
 
     def __str__(self):
         return 'Ecole {}'.format(self.nom)
@@ -96,28 +104,29 @@ class Site(models.Model):
     numero = models.AutoField(primary_key=True)
     adresse_site = models.CharField('Adresse site', max_length=250, null=False)
     # cycles = models.CharField(max_length=250)
-    nombre_cycles = models.IntegerField(
-        'Nombre de cycles', default=2, null=False)
-    nbre_salle_garderie = models.IntegerField(
-        'Nbre de Salle en Garderie',  default=0, null=False)
-    nbre_salle_primaire = models.IntegerField(
-        'Nbre de Salle au Primaire', default=6, null=False)
-    nbre_salle_college = models.IntegerField(
-        'Nbre de Salle au Collège', default=4, null=False)
+    nombreCycles = models.IntegerField('Nbre de salles au primaire,',
+                                       'Nombre de cycles', default=2, null=False)
+    nbreSalleGarderie = models.IntegerField('Nbre de salles en garderie',
+                                            'Nbre de Salle en Garderie',  default=0, null=False)
+    nbreSallePrimaire = models.IntegerField('Nbre de salles au primaire',
+                                            'Nbre de Salle au Primaire', default=6, null=False)
+    nbreSalleCollege = models.IntegerField('Nbre de salles au collège',
+                                           'Nbre de Salle au Collège', default=4, null=False)
 
     def __str__(self):
         return "site {}".format(self.numero)
 
 
 class Cycle(models.Model):
-    nom_cycle = models.CharField(
-        choices=CYCLE, default=CYCLE[0], primary_key=True, max_length=50)
+    nomCycle = models.CharField('Nom du cycle',
+                                choices=CYCLE, default=CYCLE[0], primary_key=True, max_length=50)
     # numeroSite = models.ForeignKey(Site, on_delete=models.CASCADE)
     # classes = models.ManyToManyField(Classe, related_name='classe_cycle')
-    nbreSalles = models.IntegerField(editable=False, null=True)
+    nbreSalles = models.IntegerField(
+        'Total de salles', editable=False, null=True)
 
     def __str__(self):
-        return self.nom_cycle
+        return self.nomCycle
 
 
 class Classe(models.Model):
@@ -129,20 +138,23 @@ class Classe(models.Model):
 
     identifiant = models.CharField(
         primary_key=True, choices=IDENTIFIANT_CLASSE, max_length=50)
-    reference_site = models.ManyToManyField(
+    referenceSite = models.ManyToManyField(
         Site, related_name='classe_site', default='', verbose_name='Site n°:')
-    heures_cours = models.CharField(default="7h30-13h", max_length=100)
+    heuresCours = models.CharField(
+        'Heures de cours', default="7h30-13h", max_length=100)
     # nbreEleves = models.IntegerField(null=False)
-    nbre_salles = models.IntegerField(default=1, null=False)
+    nbreSalles = models.IntegerField('Nbre de salles', default=1, null=False)
     contenance = models.IntegerField(null=False)
-    total_filles = models.IntegerField(null=True, editable=False)
-    total_garcons = models.IntegerField(null=True, editable=False)
+    totalFilles = models.IntegerField(
+        'Total des filles', null=True, editable=False)
+    totalGarcons = models.IntegerField(
+        'Total des garçons', null=True, editable=False)
     # matieresEnseigne = models.ManyToManyField(
     #     Matiere, related_name='classe_matiere')
     redoublants = models.IntegerField(default=0, null=True, editable=False)
     nouveaux = models.IntegerField(default=0, null=True, editable=False)
-    elevesVenuDailleurs = models.IntegerField(
-        default=0, null=True, editable=False)
+    elevesVenuDailleurs = models.IntegerField("Eleves venus d'ailleurs",
+                                              default=0, null=True, editable=False)
     inscrits = models.IntegerField(null=True, editable=False)
     # enseignants_affecte = models.ManyToManyField(
     #     Enseignant, related_name='classe_enseignant')
@@ -159,20 +171,24 @@ class Classe(models.Model):
 
 class Matiere(models.Model):
     # attention francy il faut que tu assignes la clé primaire à ce champ.
-    nom_matiere = models.CharField(
-        max_length=200, primary_key=True, verbose_name='nom de la matière')
-    code_matiere = models.CharField(max_length=200, null=False, unique=True)
-    enseigne_en_groupe = models.BooleanField(default=False, null=False)
-    matiere_de_base = models.BooleanField(default=False, null=False)
-    seance_par_semaine = models.IntegerField(null=False)
-    coefficient = models.IntegerField(null=False)
-    groupe_matiere = models.CharField(
+    nomMatiere = models.CharField(
+        max_length=200, primary_key=True, verbose_name='nom de la matière', default='')
+    codeMatiere = models.CharField('Code de la matière',
+                                   max_length=200, null=False, default='', unique=True)
+    pluriProf = models.CharField('Enseignée par plusieurs ?', max_length=20,
+                                 choices=PLURIPROF, default=PLURIPROF[0], null=False)
+    matiereDeBase = models.CharField('Matiere de Base ?', max_length=50, choices=MATIERE_DE_BASE,
+                                     default=MATIERE_DE_BASE[0], null=False)
+    seanceParSemaine = models.IntegerField('Nbre de Séances/semaine', default=0,
+                                           null=False)
+    coefficient = models.IntegerField(null=False, default=0)
+    groupeMatiere = models.CharField(
         max_length=100, choices=GROUPE_MATIERE, default='')
-    classe_associe = models.ManyToManyField(
-        Classe, related_name='matiere_de_la_classe', default='')
+    classAssocie = models.ManyToManyField(
+        Classe, related_name='matiere_de_la_classe')
 
     def __str__(self):
-        return self.nom_matiere
+        return self.nomMatiere
 
     class Meta:
         db_table = 'Matière'

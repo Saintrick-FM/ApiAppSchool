@@ -34,20 +34,20 @@ class Note(TimeStamp):
         Matiere, on_delete=models.DO_NOTHING, related_name='note_matiere')
     periode = models.CharField(
         'Mois ou Trimestre :', max_length=50, choices=PERIODE, null=False,)
-    note_premier_devoir = models.FloatField(
+    notePremierDevoir = models.FloatField(
         help_text='Note du 1er devoir de classe', null=False)
-    note_deuxieme_devoir = models.FloatField(
+    noteDeuxiemeDevoir = models.FloatField(
         help_text='Note du 2e devoir de classe', null=True)
-    moyenne_devoir = models.FloatField(
+    moyenneDevoir = models.FloatField(
         'Moyenne devoir de classe', null=True, editable=False)
-    note_compo = models.FloatField(
+    noteCompo = models.FloatField(
         help_text='Note du premier devoir de classe', null=False)
     coefficient_matiere = models.PositiveIntegerField(
         default=4, editable=False)
-    absence_justifiee = models.BooleanField('Absence justifiée',
-                                            blank=True, null=True,
-                                            help_text="cochez si l'absence de l'élève a été justifiée")
-    moyenne_generale_matiere = models.FloatField(
+    absenceJustifiee = models.BooleanField('Absence justifiée',
+                                           blank=True, null=True,
+                                           help_text="cochez si l'absence de l'élève a été justifiée")
+    moyenneGeneraleMatiere = models.FloatField(
         null=True, editable=False)
     observations = models.CharField('Observations', max_length=150, null=False)
 
@@ -89,5 +89,5 @@ class Note(TimeStamp):
         return output
 
 
-note = Note()
-print(note.moyenneGeneraleMatiere())
+# note = Note()
+# print(note.moyenneGeneraleMatiere())

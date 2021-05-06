@@ -39,7 +39,7 @@ TYPEFRAIS = (
 
 
 class ConfigurationFraisEleve(TimeStamp):
-    paiement_frais_numero = models.AutoField(
+    paiementFraisNumero = models.AutoField(
         'Paiement frais n°:', primary_key=True)
     frais = models.CharField(
         'Intitulé du frais', choices=TYPEFRAIS, max_length=100, null=False)
@@ -53,9 +53,9 @@ class ConfigurationFraisEleve(TimeStamp):
 
 
 class ConfigurationSalaireEnseignant(TimeStamp):
-    categorie_enseignant = models.CharField(
+    categorieEnseignant = models.CharField(
         "Catégorie d'employé :", max_length=30, choices=CATEGORIE_ENSEIGNANT, null=False)
-    salaire_defini = models.FloatField('Salaire défini', null=False)
+    salaireDefini = models.FloatField('Salaire défini', null=False)
 
     def __str__(self):
         return f'{self.categorie_enseignant} => {self.salaire_defini}'
@@ -69,16 +69,17 @@ class PaiementFrais(TimeStamp):
         Eleve, on_delete=models.DO_NOTHING, related_name='eleve_payant')
     classe = models.ForeignKey(
         Classe, related_name='classe_eleve', default='', on_delete=models.DO_NOTHING)
-    type_frais = models.ForeignKey(
-        ConfigurationFraisEleve, on_delete=models.DO_NOTHING, verbose_name='Type de frais A payer', related_name='type_frais')
-    montant_frais = models.ForeignKey(ConfigurationFraisEleve, on_delete=models.DO_NOTHING, editable=False,
-                                      null=False)
+    typeFrais = models.ForeignKey(
+        ConfigurationFraisEleve, on_delete=models.DO_NOTHING, verbose_name='Type de frais à payer', related_name='type_frais')
+    montantFrais = models.ForeignKey(ConfigurationFraisEleve, on_delete=models.DO_NOTHING, editable=False,
+                                     null=False, verbose_name='Montant Frais à payer')
     mois = models.CharField('Mois à payer', max_length=30,
                             choices=MOIS, null=True, blank=True)
-    montant_a_payer = models.FloatField(null=False)
-    montant_deja_paye = models.FloatField(
-        default=0, null=False, editable=False)
-    montant_restant = models.FloatField(null=False, editable=False)
+    montantApayer = models.FloatField('Montant à payer', null=False)
+    montantDejaPaye = models.FloatField('Montant déjà payé',
+                                        default=0, null=False, editable=False)
+    montantRestant = models.FloatField(
+        'Montant restant', null=False, editable=False)
     statut = models.BooleanField(
         blank=True, editable=False, help_text="Est coché lorsque l'élève a réglé totalement")
 
@@ -91,17 +92,19 @@ class PaiementFrais(TimeStamp):
 
 
 class PaiementSalaireEnseignant(TimeStamp):
-    paiement_numero = models.AutoField('Paiement numéro =>', primary_key=True)
+    paiementNumero = models.AutoField('Paiement numéro =>', primary_key=True)
 
-    nom_enseignant = models.ForeignKey(
-        Enseignant, on_delete=models.DO_NOTHING, related_name="enseignant_a_payer")
-    mois_paiement = models.CharField(max_length=50, null=False, choices=MOIS)
-    heures_effectuees = models.CharField(
-        max_length=50, default='8h de cours enseignees', editable=False)
-    montant_a_payer = models.FloatField(null=False)
-    montant_deja_paye = models.FloatField(
-        default=0, null=False, editable=False)
-    montant_restant = models.FloatField(null=False, editable=False)
+    nomEnseignant = models.ForeignKey(
+        Enseignant, on_delete=models.DO_NOTHING, related_name="enseignant_a_payer", verbose_name="Nom de l'enseignant")
+    moisPaiement = models.CharField(
+        'Mois à payer', max_length=50, null=False, choices=MOIS)
+    heuresEffectue = models.CharField('Heures effectuées',
+                                      max_length=50, default='8h de cours enseignees', editable=False)
+    montantApayer = models.FloatField(null=False)
+    montantDejaPaye = models.FloatField('Montant Déjà payé',
+                                        default=0, null=False, editable=False)
+    montantRestant = models.FloatField(
+        'Montant Restant à payer', null=False, editable=False)
     statut = models.BooleanField(
         blank=True, editable=False, help_text="Est coché lorsque l'élève a réglé totalement")
 
@@ -113,15 +116,17 @@ class PaiementSalaireEnseignant(TimeStamp):
 
 
 class PaiementSalairePersonnel(TimeStamp):
-    paiement_numero = models.AutoField('Paiement numéro =>', primary_key=True)
-    nom_personnel = models.ForeignKey(
-        Personnel, on_delete=models.DO_NOTHING, related_name="personnel_a_payer")
-    mois_paiement = models.CharField(max_length=50, null=False, choices=MOIS)
+    paiementNumero = models.AutoField('Paiement numéro =>', primary_key=True)
+    nomPersonnel = models.ForeignKey(
+        Personnel, on_delete=models.DO_NOTHING, verbose_name='Nom du personnel', related_name="personnel_a_payer")
+    moisPaiement = models.CharField(
+        'Mois à payer', max_length=50, null=False, choices=MOIS)
     # heures_effectuees= models.ForeignKey(HeuresEnseignant, )
-    montant_a_payer = models.FloatField(null=False)
-    montant_deja_paye = models.FloatField(
-        default=0, null=False, editable=False)
-    montant_restant = models.FloatField(null=False, editable=False)
+    montantApayer = models.FloatField('Montant à payer', null=False)
+    montantDejaPaye = models.FloatField('Montant déjà payé',
+                                        default=0, null=False, editable=False)
+    montantRestant = models.FloatField(
+        'Montant Restant à payer', null=False, editable=False)
     statut = models.BooleanField(
         blank=True, editable=False, help_text="Est coché lorsque l'élève a réglé totalement")
 

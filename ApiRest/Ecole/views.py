@@ -1,7 +1,13 @@
+import os
+
+from ApiAppSchool.settings import BASE_DIR
 from rest_framework import viewsets
 from rest_framework import serializers
+from rest_framework.decorators import api_view
+
 from .models import Ecole, Site, Classe, Matiere, Enseignant
 from rest_framework import permissions
+from rest_framework.response import Response
 
 
 class EcoleSerializer(serializers.HyperlinkedModelSerializer):
@@ -48,7 +54,7 @@ class EnseignantViewSet(viewsets.ModelViewSet):
     serializer_class = EnseignantSerializer
 
 
-class MatiereSerializer(serializers.HyperlinkedModelSerializer):
+class MatiereSerializer(serializers.ModelSerializer):
     class Meta:
         model = Matiere
         fields = '__all__'
@@ -57,4 +63,15 @@ class MatiereSerializer(serializers.HyperlinkedModelSerializer):
 class MatiereViewSet(viewsets.ModelViewSet):
     queryset = Matiere.objects.all()
     serializer_class = MatiereSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
+
+
+@api_view(['GET'])
+def PhotoView(request):
+    photos = None
+    if request.method == 'GET':
+        path = os.path.join(BASE_DIR, 'photos.json')
+        with open(path, 'r') as photo:
+            photos = photo.read()
+
+    return Response(photos, status=201)
