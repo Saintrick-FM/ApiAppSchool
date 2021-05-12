@@ -8,10 +8,7 @@ CYCLE = (
     ('College', 'College')
 
 )
-MATIERE_DE_BASE = (
-    ('Non', 'Non'),
-    ('Oui', 'Oui'),
-)
+
 PLURIPROF = (
     ('Non', 'Non'),
     ('Oui', 'Oui'),
@@ -59,6 +56,10 @@ GROUPE_MATIERE = (
     ('MATIERE_LITTERAIRES', 'Matières litteraires'),
     ('MATIERE_SCIENTIFIQUES', 'Matières scientifiques'),
     ('AUTRES_MATIERES', 'Autres matières')
+)
+MATIERE_DE_BASE = (
+    ('Non', 'Non'),
+    ('Oui', 'Oui'),
 )
 MATIERE_LITTERAIRES = [
     ['Français, Histoire'],
@@ -171,19 +172,19 @@ class Classe(models.Model):
 
 class Matiere(models.Model):
     # attention francy il faut que tu assignes la clé primaire à ce champ.
-    nomMatiere = models.CharField(
-        max_length=200, primary_key=True, verbose_name='nom de la matière', default='')
+    nomMatiere = models.CharField('nom de la matière',
+                                  max_length=200, default='', unique=True)
     codeMatiere = models.CharField('Code de la matière',
-                                   max_length=200, null=False, default='', unique=True)
+                                   max_length=200, blank=True, null=True, default='')
     pluriProf = models.CharField('Enseignée par plusieurs ?', max_length=20,
                                  choices=PLURIPROF, default=PLURIPROF[0], null=False)
     matiereDeBase = models.CharField('Matiere de Base ?', max_length=50, choices=MATIERE_DE_BASE,
-                                     default=MATIERE_DE_BASE[0], null=False)
+                                     null=True)
     seanceParSemaine = models.IntegerField('Nbre de Séances/semaine', default=0,
                                            null=False)
     coefficient = models.IntegerField(null=False, default=0)
-    groupeMatiere = models.CharField(
-        max_length=100, choices=GROUPE_MATIERE, default='')
+    groupeMatiere = models.CharField('Groupe Matière',
+                                     max_length=100, choices=GROUPE_MATIERE, blank=True, default='')
     classAssocie = models.ManyToManyField(
         Classe, related_name='matiere_de_la_classe')
 
