@@ -1,9 +1,9 @@
 import os
 
 from ApiAppSchool.settings import BASE_DIR
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from rest_framework import serializers
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -11,7 +11,7 @@ from rest_framework import status
 
 
 from .models import Ecole, Site, Classe, Matiere, Enseignant
-from rest_framework import permissions
+from rest_framework.permissions import DjangoModelPermissions
 
 
 class EcoleSerializer(serializers.HyperlinkedModelSerializer):
@@ -64,11 +64,12 @@ class MatiereSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-"""class MatiereViewSet(viewsets.ModelViewSet):
+class MatiereViewSet(viewsets.ModelViewSet):
     queryset = Matiere.objects.all()
     serializer_class = MatiereSerializer
-    # permission_classes = [permissions.IsAuthenticated]"""
+    permission_classes = [permissions.DjangoModelPermissions]
 
+"""
 
 @api_view(['GET'])
 def PhotoView(request):
@@ -82,15 +83,15 @@ def PhotoView(request):
 
 
 class MatiereList(APIView):
-    """
+    
     List all matieres, or create a new matiere.
-    """
-
+    
     def get(self, request, format=None):
         matieres = Matiere.objects.all()
         serializer = MatiereSerializer(matieres, many=True)
         return Response(serializer.data)
 
+    @permission_classes([DjangoModelPermissions])
     def post(self, request, format=None):
         serializer = MatiereSerializer(data=request.data)
         print(f'contenu de la requete post => { request.data}')
@@ -103,9 +104,9 @@ class MatiereList(APIView):
 
 
 class MatiereDetail(APIView):
-    """
+    
     Retrieve, update or delete a matiere instance.
-    """
+    
 
     def get_object(self, pk):
         try:
@@ -119,6 +120,7 @@ class MatiereDetail(APIView):
         serializer = MatiereSerializer(matiere)
         return Response(serializer.data)
 
+    @permission_classes([DjangoModelPermissions])
     def put(self, request, pk, format=None):
         matiere = self.get_object(pk)
         print(f'matière à updater => {matiere}')
@@ -129,9 +131,11 @@ class MatiereDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @permission_classes([DjangoModelPermissions])
     def delete(self, request, pk, format=None):
         print(f"pk sent => {pk}")
         matiere = self.get_object(pk)
         print(f'deleted {matiere} with id={pk} ')
         matiere.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+"""

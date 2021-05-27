@@ -43,11 +43,11 @@ MODE_PAIEMENT = (
 )
 
 STATUT_SOCIAL = (
-    ('Marie', 'Marié(e)'),
-    ('Divorce', 'Divorcé(e)'),
-    ('Fiance', 'Fiancé(e)'),
-    ('Veuf', 'Veuf(ve)'),
-    ('Celibataire', 'Célibataire')
+    ('Marié(e)', 'Marié(e)'),
+    ('Divorcé(e)', 'Divorcé(e)'),
+    ('Fiancé(e)', 'Fiancé(e)'),
+    ('Veuf(ve)', 'Veuf(ve)'),
+    ('Célibataire', 'Célibataire')
 
 )
 
@@ -79,9 +79,15 @@ AUTRES_MATIERES = [
 
 CATEGORIE_ENSEIGNANT = (
     ('Primaire', 'Primaire'),
-    ('College', 'College')
+    ('College', 'College'),
+    ('Maternelle', 'Maternelle')
 )
 
+now = date.today()
+
+
+def anneeAcademique(annee=now):
+    return f'{annee.strftime("%Y")}-{int(annee.strftime("%Y")) + 1}'
 # Create your models here.
 
 
@@ -132,11 +138,6 @@ class Cycle(models.Model):
 
 class Classe(models.Model):
 
-    now = date.today()
-
-    def anneeAcademique(annee=now):
-        return f'{annee.strftime("%Y")}-{int(annee.strftime("%Y"))+1}'
-
     identifiant = models.CharField(
         primary_key=True, choices=IDENTIFIANT_CLASSE, max_length=50)
     referenceSite = models.ManyToManyField(
@@ -163,7 +164,7 @@ class Classe(models.Model):
         help_text="Frais à payer mensuellement Eg: 8000F", null=False, max_length=50)
     cycle = models.ForeignKey(
         Cycle, on_delete=models.CASCADE, related_name='classe_cycle')
-    annee_academique = models.CharField(
+    anneeAcademique = models.CharField(
         'Année académique :', max_length=50, default=anneeAcademique, editable=False)
 
     def __str__(self):
@@ -205,37 +206,38 @@ class Enseignant(models.Model):
     date_naissance = models.CharField(max_length=50, help_text='Tappez juste la date de Naissance Eg: 11-Mai-1995',
                                       null=False)
     lieu_naissance = models.CharField(
-        max_length=50, default='Brazzaville', db_column="lieuDeNaissance", blank=True)
-    situation_sociale = models.CharField(max_length=50, choices=STATUT_SOCIAL)
+    max_length=50, default='Brazzaville', db_column="lieuDeNaissance", blank=True)
+    situationSociale = models.CharField('Situation sociale',max_length=50, choices=STATUT_SOCIAL)
     nationalite = models.CharField(
-        max_length=255, default='Congolaise', null=False)
+    max_length=255, default='Congolaise', null=False)
     adresse = models.CharField(max_length=255, null=False)
     telephone = models.CharField(max_length=15, null=False, unique=True)
     email = models.EmailField(max_length=255, null=True, blank=True)
 
-    date_d_embauche = models.DateField(null=False)
-    matiere_enseigne = models.ManyToManyField(
-        Matiere, default='', related_name='enseignant_matieres', verbose_name='matière(s) enseignée(s)')
-    classes_occupees = models.ManyToManyField(
-        Classe, related_name='enseignant_classes', verbose_name="classe(s) d'enseignement")
 
-    mode_paiement = models.CharField(
+    matiereEnseigne = models.ManyToManyField(
+        Matiere, default='', related_name='enseignant_matieres', verbose_name='Matière(s) enseignée(s)')
+
+    classesOccupees = models.ManyToManyField(
+        Classe, related_name='enseignant_classes', verbose_name="Classe(s) à enseigner")
+
+    modePaiement = models.CharField(
         'Mode de paiement', max_length=100, choices=MODE_PAIEMENT, null=False, default=MODE_PAIEMENT[0])
-    intitule_du_compte = models.CharField(
-        max_length=250, unique=True, blank=True, help_text="Ecrire le nom du compte bancaire de l'enseignant", null=True)
-    numero_du_compte_bancaire = models.CharField(
-        max_length=250, unique=True, blank=True, null=True)
-    numero_cnss = models.CharField('mode de paiement',
-                                   max_length=100, unique=True, blank=True, null=True)
-    category = models.CharField(
-        "Catégorie d'employé", max_length=30, default=CATEGORIE_ENSEIGNANT[1], choices=CATEGORIE_ENSEIGNANT, null=False)
-    cree_le = models.DateTimeField(
+    intituleCompte = models.CharField(
+        max_length=250,  blank=True, help_text="Ecrire le nom du compte bancaire de l'enseignant", null=True)
+    numeroCompteBancaire = models.CharField("Numéro compte bancaire",
+        max_length=250,  blank=True, null=True)
+    numeroCnss = models.CharField('Numéro CNSS',
+                                   max_length=100,  blank=True, null=True)
+    enseigneAu = models.CharField(
+        "Enseigne au cycle :", max_length=30, default=CATEGORIE_ENSEIGNANT[1], choices=CATEGORIE_ENSEIGNANT, null=False)
+    dateEmbauche = models.DateField(
         auto_now_add=True, editable=False, verbose_name='créé_le')
-    modifie_at = models.DateTimeField(
+    modifieLe = models.DateTimeField(
         'modifié_le', auto_now=True, editable=False)
 
     def __str__(self):
         return self.nom
 
     class Meta:
-        ordering = ['-cree_le']
+        ordering = ['-dateEmbauche']
