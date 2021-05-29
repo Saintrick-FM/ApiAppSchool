@@ -50,7 +50,10 @@ class ClasseViewSet(viewsets.ModelViewSet):
 class EnseignantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Enseignant
-        fields = '__all__'
+        fields = ['enseignant_numero','nom','civilite','date_naissance','lieu_naissance',
+                  'situationSociale','nationalite','adresse','telephone','email','matiereEnseigne',
+                  'classesOccupees','modePaiement', 'intituleCompte', 'numeroCompteBancaire', 'numeroCnss', 'enseigneAu',
+                  'dateEmbauche', 'modifieLe', 'get_asbolute_url']
 
 
 class EnseignantViewSet(viewsets.ModelViewSet):
@@ -61,13 +64,20 @@ class EnseignantViewSet(viewsets.ModelViewSet):
 class MatiereSerializer(serializers.ModelSerializer):
     class Meta:
         model = Matiere
-        fields = '__all__'
+        fields= '__all__'
+
+        # fields = ['id','nomMatiere', 'codeMatiere','pluriProf', 'matiereDeBase',
+        #           'seanceParSemaine', 'coefficient', 'groupeMatiere', 'classAssocie']
+        # extra_kwargs = {
+        #     'url': {'view_name':'matiere-detail','lookup_field': 'nomMatiere'},
+        #     # 'lookup_field': 'nomMatiere'
+        # }
 
 
 class MatiereViewSet(viewsets.ModelViewSet):
     queryset = Matiere.objects.all()
     serializer_class = MatiereSerializer
-    permission_classes = [permissions.DjangoModelPermissions]
+    #permission_classes = [permissions.DjangoModelPermissions]
 
 """
 

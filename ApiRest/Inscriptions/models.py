@@ -29,8 +29,9 @@ class Eleve(models.Model):
     naissance = models.CharField(max_length=50, help_text='Tappez juste la date de Naissance Eg: 11-Mai-1995',
                                  null=False)
 
-    lieuNaiss = models.CharField('Lieu de naissance',
-                                 max_length=50, default='Brazzaville', db_column="lieuDeNaissance")
+    # lieuNaiss = models.CharField('Lieu de naissance',
+    #                              max_length=50, default='Brazzaville', db_column="lieuDeNaissance")
+    adresse= models.CharField('Domicile de l\'élève', max_length=250, null=False)
     nationalite = models.CharField(
         max_length=255, default='Congolaise', null=False)
     etatSanitaire = models.CharField('Etat sanitaire', max_length=20,
@@ -38,11 +39,11 @@ class Eleve(models.Model):
     ecoleDorigine = models.CharField(
         "Ecole d'origine", max_length=255, default='Saint Martin')
     nomMaman = models.CharField('Nom de la mère', max_length=255,
-                                help_text="Tapez tous les noms et prénoms", null=False)
+                                help_text="Tapez tous les noms et prénoms", null=True)
     telMaman = models.CharField(
         'Tel de la mère', max_length=15, null=True, blank=True)
     nomPapa = models.CharField('Nom du père', max_length=255,
-                               help_text="Tapez tous les noms et prénoms", null=False)
+                               help_text="Tapez tous les noms et prénoms", null=True)
     telPapa = models.CharField(
         'Tel du la père', max_length=15, null=True, blank=True)
     tuteur = models.CharField(max_length=255, null=False)
@@ -58,7 +59,7 @@ class Eleve(models.Model):
         Classe, on_delete=models.CASCADE, related_name="eleve")
     redoublant = models.CharField(max_length=25,
                                   choices=STATUT, null=False, default=STATUT[0])
-    scolarite = models.CharField(max_length=50, default='', editable=False)
+    # scolarite = models.CharField(max_length=50, default='', editable=False)
 
     def __str__(self):
         return f'{self.nom}'

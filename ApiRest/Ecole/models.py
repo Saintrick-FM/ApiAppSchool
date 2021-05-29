@@ -87,7 +87,7 @@ now = date.today()
 
 
 def anneeAcademique(annee=now):
-    return f'{annee.strftime("%Y")}-{int(annee.strftime("%Y")) + 1}'
+    return f'{annee.strftime("%Y")}-{(int(annee.strftime("%Y")) + 1)}'
 # Create your models here.
 
 
@@ -173,8 +173,8 @@ class Classe(models.Model):
 
 class Matiere(models.Model):
     # attention francy il faut que tu assignes la clé primaire à ce champ.
-    nomMatiere = models.CharField('nom de la matière',
-                                  max_length=200, default='', unique=True)
+    nomMatiere = models.CharField('nom de la matière',  primary_key=True,
+                                  max_length=200)
     codeMatiere = models.CharField('Code de la matière',
                                    max_length=200, blank=True, null=True, default='')
     pluriProf = models.CharField('Enseignée par plusieurs ?', max_length=20,
@@ -192,6 +192,9 @@ class Matiere(models.Model):
     def __str__(self):
         return self.nomMatiere
 
+    def get_asbolute_url(self):
+        return f'/{self.nomMatiere}/'
+
     class Meta:
         db_table = 'Matière'
 
@@ -206,38 +209,38 @@ class Enseignant(models.Model):
     date_naissance = models.CharField(max_length=50, help_text='Tappez juste la date de Naissance Eg: 11-Mai-1995',
                                       null=False)
     lieu_naissance = models.CharField(
-    max_length=50, default='Brazzaville', db_column="lieuDeNaissance", blank=True)
+                    max_length=50, default='Brazzaville', db_column="lieuDeNaissance", blank=True)
     situationSociale = models.CharField('Situation sociale',max_length=50, choices=STATUT_SOCIAL)
     nationalite = models.CharField(
-    max_length=255, default='Congolaise', null=False)
+                    max_length=255, default='Congolaise', null=False)
     adresse = models.CharField(max_length=255, null=False)
     telephone = models.CharField(max_length=15, null=False, unique=True)
     email = models.EmailField(max_length=255, null=True, blank=True)
 
-
     matiereEnseigne = models.ManyToManyField(
-        Matiere, default='', related_name='enseignant_matieres', verbose_name='Matière(s) enseignée(s)')
-
+                    Matiere, default='', related_name='enseignant_matieres', verbose_name='Matière(s) enseignée(s)')
     classesOccupees = models.ManyToManyField(
-        Classe, related_name='enseignant_classes', verbose_name="Classe(s) à enseigner")
-
+                    Classe, related_name='enseignant_classes', verbose_name="Classe(s) à enseigner")
     modePaiement = models.CharField(
-        'Mode de paiement', max_length=100, choices=MODE_PAIEMENT, null=False, default=MODE_PAIEMENT[0])
+                    'Mode de paiement', max_length=100, choices=MODE_PAIEMENT, null=False, default=MODE_PAIEMENT[0])
     intituleCompte = models.CharField(
-        max_length=250,  blank=True, help_text="Ecrire le nom du compte bancaire de l'enseignant", null=True)
+                    max_length=250,  blank=True, help_text="Ecrire le nom du compte bancaire de l'enseignant", null=True)
     numeroCompteBancaire = models.CharField("Numéro compte bancaire",
-        max_length=250,  blank=True, null=True)
+                    max_length=250,  blank=True, null=True)
     numeroCnss = models.CharField('Numéro CNSS',
                                    max_length=100,  blank=True, null=True)
     enseigneAu = models.CharField(
         "Enseigne au cycle :", max_length=30, default=CATEGORIE_ENSEIGNANT[1], choices=CATEGORIE_ENSEIGNANT, null=False)
-    dateEmbauche = models.DateField(
+    dateEmbauche = models.DateTimeField(
         auto_now_add=True, editable=False, verbose_name='créé_le')
     modifieLe = models.DateTimeField(
         'modifié_le', auto_now=True, editable=False)
 
     def __str__(self):
         return self.nom
+
+    def get_asbolute_url(self):
+        return str(self.nom)
 
     class Meta:
         ordering = ['-dateEmbauche']

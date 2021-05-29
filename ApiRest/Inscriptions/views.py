@@ -9,7 +9,7 @@ from rest_framework import permissions
 
 # Create your views here.
 
-class EleveSerializer(serializers.HyperlinkedModelSerializer):
+class EleveSerializer(serializers.ModelSerializer):
     # classe = serializers.PrimaryKeyRelatedField(queryset=Classe.objects.all())
 
     class Meta:
@@ -21,7 +21,7 @@ class EleveSerializer(serializers.HyperlinkedModelSerializer):
 class EleveViewset(viewsets.ModelViewSet):
     queryset = Eleve.objects.all()
     serializer_class = EleveSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    #permission_classes = [permissions.IsAuthenticated]
 
 
 """
