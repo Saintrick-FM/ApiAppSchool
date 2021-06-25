@@ -11,27 +11,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a5a19fa-79cd-4ef7-975c-388fe9da8291" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0002_auto_20210512_0859.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0003_auto_20210512_1437.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0004_auto_20210512_1631.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0005_auto_20210512_1640.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0006_auto_20210514_1545.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0007_auto_20210514_1548.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0008_auto_20210526_1841.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0009_auto_20210527_0441.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0010_auto_20210527_0445.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0011_auto_20210527_0453.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Ecole/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Ecole/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ApiAppSchool/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiAppSchool/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/GRH/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/GRH/migrations/0002_auto_20210526_1841.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ApiRest/Finances/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Finances/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ApiRest/Finances/serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Finances/serializer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ApiRest/Finances/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Finances/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Inscriptions/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Inscriptions/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Pedagogie/migrations/0001_initial.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,17 +46,18 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../DevRoomApi" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ApiRest/Finances" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\HP\Desktop\Python_env\sitesDjango\ApiAppSchool\ApiRest\Finances" />
+      <recent name="C:\Users\HP\Desktop\Python_env\sitesDjango\ApiAppSchool\ApiRest\Ecole" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\HP\Desktop\Python_env\sitesDjango\ApiAppSchool\ApiRest" />
       <recent name="C:\Users\HP\Desktop\Python_env\sitesDjango\ApiAppSchool\ApiRest\Ecole" />
       <recent name="C:\Users\HP\Desktop\Python_env\sitesDjango\ApiAppSchool\ApiRest\apps" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\HP\Desktop\Python_env\sitesDjango\ApiAppSchool\ApiRest\Ecole" />
     </key>
   </component>
   <component name="RunManager" selected="Python.wsgi">
@@ -147,10 +136,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1615538910285">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1615538910285" />
     <state x="442" y="165" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1616770446931">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -159,26 +144,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1621082657528" />
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1620929523648">
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1624594135066">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1620929523648" />
-    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1620929523647">
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1624594135066" />
+    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1624594135065">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1620929523647" />
-    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1620929523647">
+    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1624594135065" />
+    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1624594135065">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1620929523647" />
-    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1620929523648">
+    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1624594135065" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1624594135066">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1620929523648" />
-    <state x="184" y="8" key="SettingsEditor" timestamp="1615475345386">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1615475345386" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1624594135066" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1618045953410">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

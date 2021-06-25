@@ -24,6 +24,7 @@ class EleveViewset(viewsets.ModelViewSet):
     #permission_classes = [permissions.IsAuthenticated]
 
 
+
 """
     now = date.today()
     anneeActuelle = int(now.strftime("%Y"))

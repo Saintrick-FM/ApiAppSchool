@@ -39,10 +39,8 @@ TYPEFRAIS = (
 
 
 class ConfigurationFraisEleve(TimeStamp):
-    paiementFraisNumero = models.AutoField(
-        'Paiement frais n°:', primary_key=True)
     frais = models.CharField(
-        'Intitulé du frais', choices=TYPEFRAIS, max_length=100, null=False)
+        'Intitulé du frais', max_length=100, null=False, primary_key=True)
     montant = models.FloatField(null=False)
 
     def __str__(self):
@@ -71,17 +69,15 @@ class PaiementFrais(TimeStamp):
         Classe, related_name='classe_eleve', default='', on_delete=models.DO_NOTHING)
     typeFrais = models.ForeignKey(
         ConfigurationFraisEleve, on_delete=models.DO_NOTHING, verbose_name='Type de frais à payer', related_name='type_frais')
-    montantFrais = models.ForeignKey(ConfigurationFraisEleve, on_delete=models.DO_NOTHING, editable=False,
-                                     null=False, verbose_name='Montant Frais à payer')
+    montantFrais = models.CharField(max_length=50, null=False, verbose_name='Montant Frais à payer')
     mois = models.CharField('Mois à payer', max_length=30,
-                            choices=MOIS, null=True, blank=True)
+                             null=True, blank=True)
     montantApayer = models.FloatField('Montant à payer', null=False)
     montantDejaPaye = models.FloatField('Montant déjà payé',
-                                        default=0, null=False, editable=False)
+                                        default=0, null=False)
     montantRestant = models.FloatField(
-        'Montant restant', null=False, editable=False)
-    statut = models.BooleanField(
-        blank=True, editable=False, help_text="Est coché lorsque l'élève a réglé totalement")
+        'Montant restant', null=False)
+    statut = models.CharField( max_length=250, blank=True)
 
     def __str__(self):
         return f'{self.type_frais} => {self.montant_frais}'

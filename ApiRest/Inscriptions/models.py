@@ -17,7 +17,6 @@ STATUT = (
     ('Redoublant', 'Redoublant')
 )
 
-
 class Eleve(models.Model):
 
     eleveNumber = models.AutoField('n°:',
@@ -26,14 +25,13 @@ class Eleve(models.Model):
                            help_text="Tapez tous les noms et prénoms", null=False)
     sexe = models.CharField(
         choices=SEXE, max_length=255, default='', null=False)
-    naissance = models.CharField(max_length=50, help_text='Tappez juste la date de Naissance Eg: 11-Mai-1995',
+    dateLieuNaissance = models.CharField(max_length=100, help_text='Tapez  la date et le lieu de Naissance Eg: 11-Mai-1995 à Brazzaville',
                                  null=False)
 
     # lieuNaiss = models.CharField('Lieu de naissance',
     #                              max_length=50, default='Brazzaville', db_column="lieuDeNaissance")
     adresse= models.CharField('Domicile de l\'élève', max_length=250, null=False)
-    nationalite = models.CharField(
-        max_length=255, default='Congolaise', null=False)
+
     etatSanitaire = models.CharField('Etat sanitaire', max_length=20,
                                      choices=SANTE, default=SANTE[0], null=False)
     ecoleDorigine = models.CharField(
@@ -49,7 +47,7 @@ class Eleve(models.Model):
     tuteur = models.CharField(max_length=255, null=False)
     telTuteur = models.CharField('Tel du tuteur', max_length=15, null=False)
     emailTuteur = models.EmailField(
-        'email du tuteur', max_length=255, null=True)
+        'email du tuteur', max_length=255, blank=True, null=True)
 
     dateInscription = models.DateField(
         "Date d'inscription", auto_now_add=True, editable=False)
