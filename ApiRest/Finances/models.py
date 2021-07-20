@@ -70,8 +70,10 @@ class PaiementFrais(TimeStamp):
     typeFrais = models.ForeignKey(
         ConfigurationFraisEleve, on_delete=models.DO_NOTHING, verbose_name='Type de frais à payer', related_name='type_frais')
     montantFrais = models.CharField(max_length=50, null=False, verbose_name='Montant Frais à payer')
-    mois = models.CharField('Mois à payer', max_length=30,
+    mois = models.CharField('Mois à payer', max_length=50,
                              null=True, blank=True)
+    moisAsolver = models.CharField('Mois à solver', max_length=50,
+                            null=True, blank=True)
     montantApayer = models.FloatField('Montant à payer', null=False)
     montantDejaPaye = models.FloatField('Montant déjà payé',
                                         default=0, null=False)

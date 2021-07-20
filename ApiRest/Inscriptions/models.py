@@ -3,10 +3,7 @@ from django.utils import timezone
 from ApiRest.Ecole.models import Classe
 from datetime import date
 
-SEXE = (
-    ('Masculin', 'Masculin'),
-    ('Feminin', 'Feminin')
-)
+SEXE = (('Masculin', 'Masculin'), ('Feminin', 'Feminin'))
 SANTE = (
     ('Apte', 'Apte'),
     ('Inapte', 'Inapte')
