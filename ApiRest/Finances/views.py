@@ -44,6 +44,17 @@ class ConfigFraisEleveViewset(viewsets.ModelViewSet):
     serializer_class = ConfigFraisEleveSerializer
 
 
+class ConfigFraisInscriptionReinscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ConfigFraisInscriptionReinscription
+        fields = '__all__'
+
+
+class ConfigFraisInscriptionReinscriptionViewset(viewsets.ModelViewSet):
+    queryset = ConfigFraisInscriptionReinscription.objects.all()
+    serializer_class = ConfigFraisInscriptionReinscriptionSerializer
+
+
 class ConfigSalaireEnseignantViewset(viewsets.ModelViewSet):
     queryset = ConfigurationSalaireEnseignant.objects.all()
     serializer_class = ConfigSalaireEnseignantSerializer
@@ -59,3 +70,13 @@ class PaiementFraisViewset(viewsets.ModelViewSet):
             queryset = queryset.filter(eleve__eleveNumber=eleveId)
         return queryset
 
+
+class PaiementInscriptionReinscriptionSerializer(serializers.ModelSerializer):
+    class meta:
+        model= PaiementInscriptionReinscription
+        fields= "__all__"
+
+
+class PaiementInscriptionReinscriptionViewset(viewsets.ModelViewSet):
+    serializer_class = PaiementInscriptionReinscriptionSerializer
+    queryset = PaiementInscriptionReinscription.objects.all()

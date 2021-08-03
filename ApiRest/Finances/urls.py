@@ -1,4 +1,4 @@
-from .views import ConfigFraisEleveViewset, PaiementFraisViewset
+from .views import ConfigFraisEleveViewset, PaiementFraisViewset, ConfigFraisInscriptionReinscriptionViewset, PaiementInscriptionReinscriptionViewset
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
@@ -6,6 +6,8 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 router.register(r'configFraisEleve', ConfigFraisEleveViewset, basename='configFraisEleve')
 router.register(r'paiementFraisEleve', PaiementFraisViewset, basename='paiementFrais')
+router.register(r'ConfigFraisInscReinsc', ConfigFraisInscriptionReinscriptionViewset, basename='ConfigFraisInscReinsc')
+router.register(r'PaiementInscriptionReinscription', PaiementInscriptionReinscriptionViewset, basename='PaiementInscReinsc')
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [

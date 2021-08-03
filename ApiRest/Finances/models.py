@@ -35,6 +35,10 @@ TYPEFRAIS = (
     ('Macaron', 'Macaron'),
     ("Tenu d'eps", "Tenu d'eps")
 )
+InscReinsc= (
+    ('Frais Inscription', 'Frais Inscription'),
+    ('Frais Reinscription', 'Frais Reinscription')
+)
 # Create your models here.
 
 
@@ -50,6 +54,19 @@ class ConfigurationFraisEleve(TimeStamp):
         db_table = 'Configuration_Frais_Eleve'
 
 
+class ConfigFraisInscriptionReinscription(TimeStamp):
+    classe = models.OneToOneField(
+        Classe, related_name='inscr_reinsc_classe', unique=True, default='', on_delete=models.DO_NOTHING)
+    fraisInscription = models.IntegerField(null=False)
+    fraisReinscription = models.IntegerField(null=False)
+
+    def __str__(self):
+        return f'{self.classe} => {self.fraisInscription}'
+
+    class Meta:
+        db_table = 'Config_Frais_Insc_Reinsc'
+
+
 class ConfigurationSalaireEnseignant(TimeStamp):
     categorieEnseignant = models.CharField(
         "Catégorie d'employé :", max_length=30, choices=CATEGORIE_ENSEIGNANT, null=False)
@@ -60,6 +77,22 @@ class ConfigurationSalaireEnseignant(TimeStamp):
 
     class Meta:
         db_table = 'Configuration_Salaire_Enseignant'
+
+
+class PaiementInscriptionReinscription(TimeStamp):
+    eleve = models.ForeignKey(
+        Eleve, on_delete=models.DO_NOTHING, related_name='eleve_payant_insc_reinsc')
+    classe = models.ForeignKey(
+        Classe, related_name='classe_eleve_insc_reinsc', default='', on_delete=models.DO_NOTHING)
+    typeFrais = models.CharField('Type de frais à payer', max_length=50, choices=InscReinsc, null=True)
+    montantFrais = models.FloatField(null=False, verbose_name='Montant Frais à payer')
+
+    def __str__(self):
+        return f'{self.typeFrais} === {self.eleve}'
+
+    class Meta:
+        db_table = 'Paiement_Inscription_Reinscription'
+        ordering = ['-cree_le']
 
 
 class PaiementFrais(TimeStamp):
@@ -87,6 +120,7 @@ class PaiementFrais(TimeStamp):
     class Meta:
         db_table = 'Paiement_frais'
         verbose_name_plural = 'frais'
+        ordering = ['-cree_le']
 
 
 class PaiementSalaireEnseignant(TimeStamp):
