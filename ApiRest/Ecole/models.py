@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import date
+from ApiRest.Utils.models import TimeStamp
 
 CYCLE = (
     ('Garderie', 'Garderie'),
@@ -86,10 +87,26 @@ CATEGORIE_ENSEIGNANT = (
 now = date.today()
 
 
-def anneeAcademique(annee=now):
+def anneeScolaire(annee=now):
     return f'{annee.strftime("%Y")}-{(int(annee.strftime("%Y")) + 1)}'
 # Create your models here.
 
+
+class AnneeScolaire(TimeStamp):
+    anneeScolaire= models.CharField('Annee scolaire actuelle', default=anneeScolaire, max_length=50, primary_key=True)
+    ouvertureAdministratif = models.CharField('Date d\'Ouverture administratif', max_length=50, null=False)
+    debutInscriptions = models.CharField('Début d\'inscriptions', max_length=50, null=False)
+    rentreeScolaire= models.CharField('Date d\'Ouverture administratif', max_length=50, null=False)
+    conges1erTrimestre = models.CharField('Date d\'Ouverture administratif', max_length=50, null=True)
+    conges2eTrimestre = models.CharField('Date d\'Ouverture administratif', max_length=50, null=True)
+    debutVacancesScolaire = models.CharField('Date d\'Ouverture administratif', max_length=50, null=True)
+    debutVacancesAdministratives = models.CharField('Date d\'Ouverture administratif', max_length=50, null=True)
+
+    def __str__(self):
+        return 'Annee Scolaire '.format(self.anneeScolaire)
+
+    class Meta:
+        db_table = 'Annee_Scolaire'
 
 class Ecole(models.Model):
     nom = models.CharField(max_length=200, null=False)

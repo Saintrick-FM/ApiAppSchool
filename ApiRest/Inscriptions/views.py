@@ -19,9 +19,16 @@ class EleveSerializer(serializers.ModelSerializer):
 
 
 class EleveViewset(viewsets.ModelViewSet):
-    queryset = Eleve.objects.all()
     serializer_class = EleveSerializer
-    #permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        queryset = Eleve.objects.all()
+        anneeScolaire = self.request.query_params.get("annee_scolaire", None)
+        if anneeScolaire is not None:
+            queryset = queryset.filter(anneeScolaire=anneeScolaire)
+        return queryset
+
+#permission_classes = [permissions.IsAuthenticated]
 
 
 

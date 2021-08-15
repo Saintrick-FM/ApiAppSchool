@@ -1,8 +1,9 @@
 from django.db import models
 from ApiRest.Utils.models import TimeStamp
 from ApiRest.Inscriptions.models import Eleve
-from ApiRest.Ecole.models import Enseignant, Classe
+from ApiRest.Ecole.models import Enseignant, Classe, AnneeScolaire
 from ApiRest.GRH.models import Personnel
+
 CATEGORIE_ENSEIGNANT = (
     ('Primaire', 'Enseigne au Primaire'),
     ('College', 'Enseigne au College')
@@ -45,7 +46,11 @@ InscReinsc= (
 class ConfigurationFraisEleve(TimeStamp):
     frais = models.CharField(
         'Intitulé du frais', max_length=100, null=False, primary_key=True)
+    periodePaiement = models.CharField(
+        'Période de paiement', max_length=100, null=False)
     montant = models.FloatField(null=False)
+    AnneeScolaire = models.ForeignKey(
+        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='config_frais_annee', editable=False)
 
     def __str__(self):
         return f'{self.frais} => {self.montant}'
@@ -59,6 +64,8 @@ class ConfigFraisInscriptionReinscription(TimeStamp):
         Classe, related_name='inscr_reinsc_classe', unique=True, default='', on_delete=models.DO_NOTHING)
     fraisInscription = models.IntegerField(null=False)
     fraisReinscription = models.IntegerField(null=False)
+    AnneeScolaire = models.ForeignKey(
+        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='config_inscReinsc_annee', editable=False)
 
     def __str__(self):
         return f'{self.classe} => {self.fraisInscription}'
@@ -71,6 +78,8 @@ class ConfigurationSalaireEnseignant(TimeStamp):
     categorieEnseignant = models.CharField(
         "Catégorie d'employé :", max_length=30, choices=CATEGORIE_ENSEIGNANT, null=False)
     salaireDefini = models.FloatField('Salaire défini', null=False)
+    AnneeScolaire = models.ForeignKey(
+        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='config_salaireTeacher_annee', editable=False)
 
     def __str__(self):
         return f'{self.categorie_enseignant} => {self.salaire_defini}'
@@ -86,6 +95,8 @@ class PaiementInscriptionReinscription(TimeStamp):
         Classe, related_name='classe_eleve_insc_reinsc', default='', on_delete=models.DO_NOTHING)
     typeFrais = models.CharField('Type de frais à payer', max_length=50, choices=InscReinsc, null=True)
     montantFrais = models.FloatField(null=False, verbose_name='Montant Frais à payer')
+    AnneeScolaire = models.ForeignKey(
+        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='annee_scolaire_insc_reinsc', editable=False)
 
     def __str__(self):
         return f'{self.typeFrais} === {self.eleve}'
@@ -95,13 +106,12 @@ class PaiementInscriptionReinscription(TimeStamp):
         ordering = ['-cree_le']
 
 
-class PaiementFrais(TimeStamp):
+class PaiementFraisMensuels(TimeStamp):
     eleve = models.ForeignKey(
         Eleve, on_delete=models.DO_NOTHING, related_name='eleve_payant')
     classe = models.ForeignKey(
         Classe, related_name='classe_eleve', default='', on_delete=models.DO_NOTHING)
-    typeFrais = models.ForeignKey(
-        ConfigurationFraisEleve, on_delete=models.DO_NOTHING, verbose_name='Type de frais à payer', related_name='type_frais')
+
     montantFrais = models.CharField(max_length=50, null=False, verbose_name='Montant Frais à payer')
     mois = models.CharField('Mois à payer', max_length=50,
                              null=True, blank=True)
@@ -113,12 +123,36 @@ class PaiementFrais(TimeStamp):
     montantRestant = models.FloatField(
         'Montant restant', null=False)
     statut = models.CharField( max_length=250, blank=True)
+    AnneeScolaire = models.ForeignKey(
+        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='frais_mensuel_annee', editable=False)
 
     def __str__(self):
         return f'{self.type_frais} => {self.montant_frais}'
 
     class Meta:
-        db_table = 'Paiement_frais'
+        db_table = 'Paiement_frais_Mensuels'
+        ordering = ['-cree_le']
+
+
+class PaiementAutresFrais(TimeStamp):
+    eleve = models.ForeignKey(
+        Eleve, on_delete=models.DO_NOTHING, related_name='eleve_payant')
+    classe = models.ForeignKey(
+        Classe, related_name='classe_eleve', default='', on_delete=models.DO_NOTHING)
+    typeFrais = models.ForeignKey(
+        ConfigurationFraisEleve, on_delete=models.DO_NOTHING, verbose_name='Type de frais à payer', related_name='type_frais')
+    montantFrais = models.CharField(max_length=50, null=False, verbose_name='Montant Frais à payer')
+    montantApayer = models.FloatField('Montant à payer', null=False)
+    montantRestant = models.FloatField(
+        'Montant restant', null=False)
+    AnneeScolaire = models.ForeignKey(
+        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='autre_frais_annee',editable=False)
+
+    def __str__(self):
+        return f'{self.type_frais} => {self.montant_frais}'
+
+    class Meta:
+        db_table = 'Paiement_Autres_frais'
         verbose_name_plural = 'frais'
         ordering = ['-cree_le']
 
@@ -139,6 +173,8 @@ class PaiementSalaireEnseignant(TimeStamp):
         'Montant Restant à payer', null=False, editable=False)
     statut = models.BooleanField(
         blank=True, editable=False, help_text="Est coché lorsque l'élève a réglé totalement")
+    AnneeScolaire = models.ForeignKey(
+        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='salaire_teacher_annee', editable=False)
 
     def __str__(self):
         return f'Salaire enseignant => {self.type_de_paie} | Mois de: {self.mois_paiement}'
@@ -161,6 +197,8 @@ class PaiementSalairePersonnel(TimeStamp):
         'Montant Restant à payer', null=False, editable=False)
     statut = models.BooleanField(
         blank=True, editable=False, help_text="Est coché lorsque l'élève a réglé totalement")
+    AnneeScolaire = models.ForeignKey(
+        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='salaire_personnel_annee', editable=False)
 
     def __str__(self):
         return f' Salaire de => {self.nom_personnel} | Mois de: {self.mois_paiement}'

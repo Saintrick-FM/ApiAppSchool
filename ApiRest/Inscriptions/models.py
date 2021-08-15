@@ -1,6 +1,6 @@
 from django.db import models
-from django.utils import timezone
-from ApiRest.Ecole.models import Classe
+from ApiRest.Utils.models import TimeStamp
+from ApiRest.Ecole.models import Classe, AnneeScolaire
 from datetime import date
 
 SEXE = (('Masculin', 'Masculin'), ('Feminin', 'Feminin'))
@@ -14,7 +14,14 @@ STATUT = (
     ('Redoublant', 'Redoublant')
 )
 
-class Eleve(models.Model):
+now = date.today()
+
+
+def anneeAcademique(annee=now):
+    return f'{annee.strftime("%Y")}-{(int(annee.strftime("%Y")) + 1)}'
+
+
+class Eleve(TimeStamp):
 
     eleveNumber = models.AutoField('n°:',
                                    primary_key=True, auto_created=True, db_column='n°')
@@ -25,8 +32,6 @@ class Eleve(models.Model):
     dateLieuNaissance = models.CharField(max_length=100, help_text='Tapez  la date et le lieu de Naissance Eg: 11-Mai-1995 à Brazzaville',
                                  null=False)
 
-    # lieuNaiss = models.CharField('Lieu de naissance',
-    #                              max_length=50, default='Brazzaville', db_column="lieuDeNaissance")
     adresse= models.CharField('Domicile de l\'élève', max_length=250, null=False)
 
     etatSanitaire = models.CharField('Etat sanitaire', max_length=20,
@@ -54,6 +59,9 @@ class Eleve(models.Model):
         Classe, on_delete=models.CASCADE, related_name="eleve")
     redoublant = models.CharField(max_length=25,
                                   choices=STATUT, null=False, default=STATUT[0])
+    AnneeScolaire = models.ForeignKey(
+        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='eleve_annee_scolaire', editable=False)
+
     # scolarite = models.CharField(max_length=50, default='', editable=False)
 
     def __str__(self):
