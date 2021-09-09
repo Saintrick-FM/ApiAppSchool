@@ -10,11 +10,34 @@ from rest_framework.response import Response
 from rest_framework import status
 
 
-from .models import Ecole, Site, Classe, Matiere, Enseignant
+from .models import Ecole, Site, Classe, Matiere, Enseignant, AnneeScolaire,Cycle
 from rest_framework.permissions import DjangoModelPermissions
 
+class AnneeScolaireSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AnneeScolaire
+        fields = '__all__'
 
-class EcoleSerializer(serializers.HyperlinkedModelSerializer):
+class AnneeScolaireViewSet(viewsets.ModelViewSet):
+    queryset = AnneeScolaire.objects.all()
+    serializer_class = AnneeScolaireSerializer
+    authentication_classes = []
+    permission_classes = [permissions.AllowAny]
+
+
+class CycleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cycle
+        fields = '__all__'
+
+class CycleViewSet(viewsets.ModelViewSet):
+    queryset = Cycle.objects.all()
+    serializer_class = CycleSerializer
+    authentication_classes = []
+    permission_classes = [permissions.AllowAny]
+
+
+class EcoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ecole
         fields = '__all__'
@@ -23,9 +46,12 @@ class EcoleSerializer(serializers.HyperlinkedModelSerializer):
 class EcoleViewSet(viewsets.ModelViewSet):
     queryset = Ecole.objects.all()
     serializer_class = EcoleSerializer
+    authentication_classes = []
+    permission_classes = [permissions.AllowAny]
 
 
-class SiteSerializer(serializers.HyperlinkedModelSerializer):
+
+class SiteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Site
         fields = '__all__'

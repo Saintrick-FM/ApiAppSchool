@@ -15,6 +15,15 @@ class ConfigSalaireEnseignantSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['categorie_enseignant', 'salaire_defini']
 
 
+class EcolageEtAutresFraisSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EcolageEtAutresFrais
+        fields = '__all__'
+
+class EcolageEtAutresFraisViewSet(viewsets.ModelViewSet):
+    queryset = EcolageEtAutresFrais.objects.all()
+    serializer_class = EcolageEtAutresFraisSerializer
+
 # class ConfigSalairePersonnelSerializer(serializers.HyperlinkedModelSerializer):
 #     class Meta:
 #         model = ConfigurationSalairePersonnel

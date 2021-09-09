@@ -6,7 +6,9 @@ CYCLE = (
     ('Garderie', 'Garderie'),
     ('Prescolaire', 'Prescolaire'),
     ('Primaire', 'Primaire'),
-    ('College', 'College')
+    ('College', 'College'),
+    ('Lycée', 'Lycée'),
+
 
 )
 
@@ -94,54 +96,58 @@ def anneeScolaire(annee=now):
 
 class AnneeScolaire(TimeStamp):
     anneeScolaire= models.CharField('Annee scolaire actuelle', default=anneeScolaire, max_length=50, primary_key=True)
-    ouvertureAdministratif = models.CharField('Date d\'Ouverture administratif', max_length=50, null=False)
-    debutInscriptions = models.CharField('Début d\'inscriptions', max_length=50, null=False)
-    rentreeScolaire= models.CharField('Date d\'Ouverture administratif', max_length=50, null=False)
-    conges1erTrimestre = models.CharField('Date d\'Ouverture administratif', max_length=50, null=True)
-    conges2eTrimestre = models.CharField('Date d\'Ouverture administratif', max_length=50, null=True)
-    debutVacancesScolaire = models.CharField('Date d\'Ouverture administratif', max_length=50, null=True)
-    debutVacancesAdministratives = models.CharField('Date d\'Ouverture administratif', max_length=50, null=True)
+    ouvertureAdministratif = models.DateField('Date d\'Ouverture administratif', max_length=50, null=False)
+    debutInscriptions = models.DateField('Début d\'inscriptions', max_length=50, null=False)
+    rentreeScolaire= models.DateField('Date rentree scolaire', max_length=50, null=False)
+    conges1erTrimestre = models.CharField('Période congés du 1er trimestre', max_length=50, null=True)
+    conges2eTrimestre = models.CharField('Période congés du 2e trimestre', max_length=50, null=True)
+    debutVacancesScolaire = models.DateField(verbose_name="Début de vacances pour élèves",null=True)
+    debutVacancesAdministratives = models.DateField(verbose_name="Début de vacances du personnel",null=True)
+    statut= models.CharField(max_length=50,null=False)
 
     def __str__(self):
-        return 'Annee Scolaire '.format(self.anneeScolaire)
+        return f'Annee Scolaire {self.anneeScolaire}'
 
     class Meta:
         db_table = 'Annee_Scolaire'
 
-class Ecole(models.Model):
-    nom = models.CharField(max_length=200, null=False)
+
+class Ecole(TimeStamp):
+    nom = models.CharField(max_length=100, null=False, unique=True)
     nbreSites = models.IntegerField('Nbre de sites', null=False, default=2)
-    pays = models.CharField(max_length=100, null=False)
+    devise= models.CharField(max_length=100, null=False)
+    programme = models.CharField(max_length=100, null=False)
     ville = models.CharField(max_length=200, null=False)
     adresse = models.CharField(max_length=200, null=False)
     telephone = models.CharField(max_length=200, null=False)
     email = models.EmailField(null=True, blank=True)
-    siteInternet = models.CharField('Site internet', null=True, max_length=200)
+    # siteInternet = models.CharField('Site internet', null=True, max_length=200)
     prefixmatricule = models.CharField(
         'Préfix matricule', max_length=200, null=False)
+    vagues= models.CharField(max_length=50, default="Matin", null=False)
+
+    garderie= models.BooleanField(null=False)
+    nbreSalleGarderie = models.IntegerField('Nbre de salles en garderie', default=0, null=False)
+
+    heuresMatin = models.CharField(max_length=50, null=False)
+    recreMatin= models.CharField(max_length=50, null=False)
+    recreMidi = models.CharField(max_length=50, null=True)
+    heuresMidi= models.CharField(max_length=50, null=True)
 
     def __str__(self):
         return 'Ecole {}'.format(self.nom)
 
 
-class Site(models.Model):
-    numero = models.AutoField(primary_key=True)
-    adresse_site = models.CharField('Adresse site', max_length=250, null=False)
+class Site(TimeStamp):
+    identifiant = models.CharField(max_length=50, primary_key=True)
+    adresse_site = models.CharField('Adresse site', max_length=250, null=True)
     # cycles = models.CharField(max_length=250)
-    nombreCycles = models.IntegerField('Nbre de salles au primaire,',
-                                       'Nombre de cycles', default=2, null=False)
-    nbreSalleGarderie = models.IntegerField('Nbre de salles en garderie',
-                                            'Nbre de Salle en Garderie',  default=0, null=False)
-    nbreSallePrimaire = models.IntegerField('Nbre de salles au primaire',
-                                            'Nbre de Salle au Primaire', default=6, null=False)
-    nbreSalleCollege = models.IntegerField('Nbre de salles au collège',
-                                           'Nbre de Salle au Collège', default=4, null=False)
 
     def __str__(self):
-        return "site {}".format(self.numero)
+        return self.identifiant
 
 
-class Cycle(models.Model):
+class Cycle(TimeStamp):
     nomCycle = models.CharField('Nom du cycle',
                                 choices=CYCLE, default=CYCLE[0], primary_key=True, max_length=50)
     # numeroSite = models.ForeignKey(Site, on_delete=models.CASCADE)
@@ -149,14 +155,17 @@ class Cycle(models.Model):
     nbreSalles = models.IntegerField(
         'Total de salles', editable=False, null=True)
 
+    anneeScolaire = models.ForeignKey(
+        AnneeScolaire, on_delete=models.DO_NOTHING, null=True, related_name='cycle_annee_scolaire')
+
     def __str__(self):
         return self.nomCycle
 
 
-class Classe(models.Model):
+class Classe(TimeStamp):
 
     identifiant = models.CharField(
-        primary_key=True, choices=IDENTIFIANT_CLASSE, max_length=50)
+        primary_key=True,  max_length=50)
     referenceSite = models.ManyToManyField(
         Site, related_name='classe_site', default='', verbose_name='Site n°:')
     heuresCours = models.CharField(
@@ -178,17 +187,17 @@ class Classe(models.Model):
     # enseignants_affecte = models.ManyToManyField(
     #     Enseignant, related_name='classe_enseignant')
     scolarite = models.CharField(
-        help_text="Frais à payer mensuellement Eg: 8000F", null=False, max_length=50)
+        help_text="Frais à payer mensuellement Eg: 8000F", null=True, max_length=50)
     cycle = models.ForeignKey(
-        Cycle, on_delete=models.CASCADE, related_name='classe_cycle')
-    anneeAcademique = models.CharField(
-        'Année académique :', max_length=50, default=anneeAcademique, editable=False)
+        Cycle, related_name='classe_cycle', on_delete=models.DO_NOTHING)
+    anneeScolaire = models.ForeignKey(
+        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='classe_annee_scolaire', null=True, verbose_name="Année Scolaire")
 
     def __str__(self):
         return 'Classe {}'.format(self.identifiant)
 
 
-class Matiere(models.Model):
+class Matiere(TimeStamp):
     # attention francy il faut que tu assignes la clé primaire à ce champ.
     nomMatiere = models.CharField('nom de la matière',  primary_key=True,
                                   max_length=200)
@@ -206,6 +215,9 @@ class Matiere(models.Model):
     classAssocie = models.ManyToManyField(
         Classe, related_name='matiere_de_la_classe')
 
+    anneeScolaire = models.ForeignKey(
+        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='matiere_annee_scolaire')
+
     def __str__(self):
         return self.nomMatiere
 
@@ -216,7 +228,7 @@ class Matiere(models.Model):
         db_table = 'Matière'
 
 
-class Enseignant(models.Model):
+class Enseignant(TimeStamp):
     enseignant_numero = models.AutoField('N°:',
                                          primary_key=True, auto_created=True, db_column='n°')
     nom = models.CharField(unique=True, max_length=255,
@@ -248,10 +260,8 @@ class Enseignant(models.Model):
                                    max_length=100,  blank=True, null=True)
     enseigneAu = models.CharField(
         "Enseigne au cycle :", max_length=30, default=CATEGORIE_ENSEIGNANT[1], choices=CATEGORIE_ENSEIGNANT, null=False)
-    dateEmbauche = models.DateTimeField(
-        auto_now_add=True, editable=False, verbose_name='créé_le')
-    modifieLe = models.DateTimeField(
-        'modifié_le', auto_now=True, editable=False)
+    anneeScolaire = models.ForeignKey(
+        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='enseignant_annee_scolaire')
 
     def __str__(self):
         return self.nom
@@ -260,4 +270,4 @@ class Enseignant(models.Model):
         return str(self.nom)
 
     class Meta:
-        ordering = ['-dateEmbauche']
+        ordering = ['-cree_le']
