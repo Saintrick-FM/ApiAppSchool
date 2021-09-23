@@ -36,21 +36,22 @@ TYPEFRAIS = (
     ('Macaron', 'Macaron'),
     ("Tenu d'eps", "Tenu d'eps")
 )
-InscReinsc= (
+InscReinsc = (
     ('Frais Inscription', 'Frais Inscription'),
     ('Frais Reinscription', 'Frais Reinscription')
 )
 # Create your models here.
 
+
 class ConfigurationFraisEleve(TimeStamp):
     frais = models.CharField(
         'Intitulé du frais', max_length=100, null=False, primary_key=True)
     periodePaiement = models.CharField(
-        'Période de paiement', max_length=100, null=False)
+        'Période de paiement', max_length=100, null=True)
     # obligatoire= models.BooleanField(verbose_name="Frais Obligatoire ?",default=True, null=False)
-    montant = models.FloatField(null=False)
+    montant = models.FloatField(null=True)
     AnneeScolaire = models.ForeignKey(
-         AnneeScolaire, on_delete=models.DO_NOTHING, related_name='config_frais_annee')
+        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='config_frais_annee', null=True)
 
     def __str__(self):
         return f'{self.frais}'
@@ -59,28 +60,53 @@ class ConfigurationFraisEleve(TimeStamp):
         db_table = 'Configuration_Frais_Eleve'
 
 
-class EcolageEtAutresFrais(TimeStamp):
-    typeFrais = models.ForeignKey(ConfigurationFraisEleve,
-        verbose_name='Intitulé du frais', max_length=100, null=False, on_delete=models.DO_NOTHING)
+class ConfigEcolage(TimeStamp):
+    identifiant = models.CharField(
+        'Intitulé du frais', max_length=100, default="Frais mensuels")
     periodePaiement = models.CharField(
         'Période de paiement', max_length=100, null=False)
-    obligatoire= models.BooleanField(verbose_name="Frais Obligatoire ?",default=True, null=False)
+    obligatoire = models.BooleanField(
+        verbose_name="Frais Obligatoire ?", default=True, null=False)
     montant = models.FloatField(null=False)
     AnneeScolaire = models.ForeignKey(
-        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='ecolage_AutresFrais_annnee')
-    classe = models.OneToOneField(
-        Classe, related_name='ecolage_classe', unique=True, null=True, on_delete=models.DO_NOTHING)
+        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='ecolage_annnee')
+    classe = models.CharField(null=False, default='')
 
     def __str__(self):
         return f'{self.typeFrais} => {self.montant}'
 
+
+
     class Meta:
-        db_table = 'Ecolage_Et_Autres_Frais'
+        db_table = 'Ecolage'
+
+
+class ConfigAutresFrais(TimeStamp):
+    identifiant = models.CharField(
+        max_length=100, null=False, primary_key=True)
+    periodePaiement = models.CharField(
+        'Période de paiement', max_length=100, null=False)
+    obligatoire = models.BooleanField(
+        verbose_name="Frais Obligatoire ?", default=True, null=False)
+    montant = models.FloatField(null=False)
+    AnneeScolaire = models.ForeignKey(
+        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='autresFrais_annnee')
+    classesSpeciales = models.ManyToManyField(
+        Classe, related_name='autreFrais_classe')
+
+    def __str__(self):
+        return f'{self.identifiant} => {self.montant}'
+
+    class Meta:
+        db_table = 'Configuration_Autres_Frais'
+        verbose_name_plural = 'Configuration_Autres_Frais'
 
 
 class ConfigFraisInscriptionReinscription(TimeStamp):
     classe = models.OneToOneField(
         Classe, related_name='inscr_reinsc_classe', unique=True, default='', on_delete=models.DO_NOTHING)
+    periodePaiement = models.CharField(
+        'Période de paiement', max_length=100, default="", null=False)
     fraisInscription = models.IntegerField(null=False)
     fraisReinscription = models.IntegerField(null=False)
     AnneeScolaire = models.ForeignKey(
@@ -91,6 +117,26 @@ class ConfigFraisInscriptionReinscription(TimeStamp):
 
     class Meta:
         db_table = 'Config_Frais_Insc_Reinsc'
+
+
+class ConfigDepenses(TimeStamp):
+    identifiant = models.CharField(
+        'Intitulé du frais', max_length=100, primary_key=True)
+    periodePaiement = models.CharField(
+        'Période de paiement', max_length=100, null=False)
+    obligatoire = models.BooleanField(
+        verbose_name="Frais Obligatoire ?", default=True, null=False)
+    montant = models.FloatField(null=True)
+    AnneeScolaire = models.ForeignKey(
+        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='config_depense_annnee')
+    caisseDeRetrait = models.CharField(
+        'Caisse de retrait', max_length=100, null=True)
+
+    def __str__(self):
+        return f'{self.identifiant}'
+
+    class Meta:
+        db_table = 'Config_Depenses'
 
 
 class ConfigurationSalaireEnseignant(TimeStamp):
@@ -112,8 +158,12 @@ class PaiementInscriptionReinscription(TimeStamp):
         Eleve, on_delete=models.DO_NOTHING, related_name='eleve_payant_insc_reinsc')
     classe = models.ForeignKey(
         Classe, related_name='classe_eleve_insc_reinsc', default='', on_delete=models.DO_NOTHING)
-    typeFrais = models.CharField('Type de frais à payer', max_length=50, choices=InscReinsc, null=True)
-    montantFrais = models.FloatField(null=False, verbose_name='Montant Frais à payer')
+    typeFrais = models.ForeignKey(
+        ConfigurationFraisEleve, on_delete=models.DO_NOTHING, default="", verbose_name='Type de frais à payer',
+        related_name='InscReinsc_type_frais')
+
+    montantFrais = models.FloatField(
+        null=False, verbose_name='Montant Frais à payer')
     AnneeScolaire = models.ForeignKey(
         AnneeScolaire, on_delete=models.DO_NOTHING, related_name='annee_scolaire_insc_reinsc')
 
@@ -131,11 +181,12 @@ class PaiementFraisMensuels(TimeStamp):
     classe = models.ForeignKey(
         Classe, related_name='classeEleve_payant_FM', default='', on_delete=models.DO_NOTHING)
 
-    montantFrais = models.CharField(max_length=50, null=False, verbose_name='Montant Frais à payer')
+    montantFrais = models.CharField(
+        max_length=50, null=False, verbose_name='Montant Frais à payer')
     mois = models.CharField('Mois à payer', max_length=50,
-                             null=True, blank=True)
-    moisAsolver = models.CharField('Mois à solver', max_length=50,
                             null=True, blank=True)
+    moisAsolver = models.CharField('Mois à solver', max_length=50,
+                                   null=True, blank=True)
     montantApayer = models.FloatField('Montant à payer', null=False)
     montantDejaPaye = models.FloatField('Montant déjà payé',
                                         default=0, null=False)
@@ -160,7 +211,8 @@ class PaiementAutresFrais(TimeStamp):
         Classe, related_name='classeEleve_payant_autreFrais', default='', on_delete=models.DO_NOTHING)
     typeFrais = models.ForeignKey(
         ConfigurationFraisEleve, on_delete=models.DO_NOTHING, verbose_name='Type de frais à payer', related_name='type_frais')
-    montantFrais = models.CharField(max_length=50, null=False, verbose_name='Montant Frais à payer')
+    montantFrais = models.CharField(
+        max_length=50, null=False, verbose_name='Montant Frais à payer')
     montantApayer = models.FloatField('Montant à payer', null=False)
     montantRestant = models.FloatField(
         'Montant restant', null=False)
@@ -174,6 +226,38 @@ class PaiementAutresFrais(TimeStamp):
         db_table = 'Paiement_Autres_frais'
         verbose_name_plural = 'frais'
         ordering = ['-cree_le']
+
+
+class PaiementEveryFrais(TimeStamp):
+    eleve = models.ForeignKey(
+        Eleve, on_delete=models.DO_NOTHING, related_name='eleve_payant')
+    classe = models.ForeignKey(
+        Classe, related_name='classe_eleve', default='', on_delete=models.DO_NOTHING)
+    typeFrais = models.ForeignKey(
+        ConfigurationFraisEleve, on_delete=models.DO_NOTHING, verbose_name='Type de frais à payer', related_name='typeFrais')
+    montantFrais = models.CharField(
+        max_length=50, null=False, verbose_name='Montant Frais à payer')
+    mois = models.CharField('Mois à payer', max_length=30,
+                            null=True, blank=True)
+    moisAsolver = models.CharField('Mois à solver', max_length=50,
+                                   null=True, blank=True, default="")
+
+    montantApayer = models.FloatField('Montant à payer', null=False)
+    montantDejaPaye = models.FloatField('Montant déjà payé',
+                                        default=0, null=False)
+    montantRestant = models.FloatField(
+        'Montant restant', null=False)
+    statut = models.CharField(max_length=250, blank=True)
+
+    AnneeScolaire = models.ForeignKey(
+        AnneeScolaire, on_delete=models.DO_NOTHING, default="", related_name='everyfrais_annee')
+
+    def __str__(self):
+        return f'{self.typeFrais} => {self.montantFrais}'
+
+    class Meta:
+        db_table = 'Paiement_Every_Frais'
+        verbose_name_plural = 'Paiement_Every_Frais'
 
 
 class PaiementSalaireEnseignant(TimeStamp):

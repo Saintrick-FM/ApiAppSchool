@@ -11,28 +11,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a5a19fa-79cd-4ef7-975c-388fe9da8291" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0002_auto_20210827_1443.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0003_auto_20210827_1512.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0004_auto_20210827_1524.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Ecole/migrations/0005_auto_20210828_0607.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0002_configurationfraiseleve_classe.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0003_configurationfraiseleve_obligatoire.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0004_auto_20210908_1541.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0005_auto_20210908_2031.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/GRH/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Inscriptions/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Pedagogie/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0006_configfraisinscriptionreinscription_periodepaiement.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0007_auto_20210911_1216.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0008_auto_20210911_1506.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0009_configdepenses.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0010_auto_20210912_0510.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0011_paiementeveryfrais.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0012_paiementeveryfrais_anneescolaire.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0015_paiementeveryfrais_moisasolver.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ApiRest/Inscriptions/migrations/0002_auto_20210914_0506.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Ecole/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Ecole/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Ecole/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Ecole/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ApiRest/Finances/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Finances/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ApiRest/Finances/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Finances/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ApiRest/Finances/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Finances/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ApiRest/Finances/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Finances/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Inscriptions/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Inscriptions/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

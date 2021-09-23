@@ -11,6 +11,7 @@ from rest_framework import status
 
 
 from .models import Ecole, Site, Classe, Matiere, Enseignant, AnneeScolaire,Cycle
+from ApiRest.Finances.models import ConfigEcolage
 from rest_framework.permissions import DjangoModelPermissions
 
 class AnneeScolaireSerializer(serializers.ModelSerializer):
@@ -63,6 +64,7 @@ class SiteViewSet(viewsets.ModelViewSet):
 
 
 class ClasseSerializer(serializers.ModelSerializer):
+    # scolarite= serializers.CharField(read_only=True, source='ConfigEcolage.montant')
     class Meta:
         model = Classe
         fields = '__all__'
@@ -72,6 +74,14 @@ class ClasseViewSet(viewsets.ModelViewSet):
     queryset = Classe.objects.all()
     serializer_class = ClasseSerializer
 
+"""
+    frais_ecolages = ConfigEcolage.objects.all()
+    for ecolage in frais_ecolages:
+        result= list(Classe.objects.filter(identifiant= ecolage.montant))
+        for x in result:
+            setattr(x,'ecolage',ecolage)
+
+"""
 
 class EnseignantSerializer(serializers.ModelSerializer):
     class Meta:

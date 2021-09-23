@@ -60,7 +60,7 @@ class Eleve(TimeStamp):
     redoublant = models.CharField(max_length=25,
                                   choices=STATUT, null=False, default=STATUT[0])
     AnneeScolaire = models.ForeignKey(
-        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='eleve_annee_scolaire', editable=False)
+        AnneeScolaire, on_delete=models.DO_NOTHING, related_name='eleve_annee_scolaire')
 
     # scolarite = models.CharField(max_length=50, default='', editable=False)
 

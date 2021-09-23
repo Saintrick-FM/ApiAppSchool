@@ -15,14 +15,37 @@ class ConfigSalaireEnseignantSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['categorie_enseignant', 'salaire_defini']
 
 
-class EcolageEtAutresFraisSerializer(serializers.ModelSerializer):
+class ConfigEcolageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = EcolageEtAutresFrais
+        model = ConfigEcolage
         fields = '__all__'
 
-class EcolageEtAutresFraisViewSet(viewsets.ModelViewSet):
-    queryset = EcolageEtAutresFrais.objects.all()
-    serializer_class = EcolageEtAutresFraisSerializer
+
+class ConfigEcolageViewSet(viewsets.ModelViewSet):
+    queryset = ConfigEcolage.objects.all()
+    serializer_class = ConfigEcolageSerializer
+
+
+class ConfigAutresFraisSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ConfigAutresFrais
+        fields = '__all__'
+
+
+class ConfigAutresFraisViewSet(viewsets.ModelViewSet):
+    queryset = ConfigAutresFrais.objects.all()
+    serializer_class = ConfigAutresFraisSerializer
+
+
+class ConfigDepenseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ConfigDepenses
+        fields = '__all__'
+
+
+class ConfigDepenseViewSet(viewsets.ModelViewSet):
+    queryset = ConfigDepenses.objects.all()
+    serializer_class = ConfigDepenseSerializer
 
 # class ConfigSalairePersonnelSerializer(serializers.HyperlinkedModelSerializer):
 #     class Meta:
@@ -50,8 +73,8 @@ class PaiementSalairePersonnelSerializer(serializers.HyperlinkedModelSerializer)
 
 class PaiementAutresFraisSerializer(serializers.ModelSerializer):
     class Meta:
-        model= PaiementAutresFrais
-        fields= "__all__"
+        model = PaiementAutresFrais
+        fields = "__all__"
 
 
 class ConfigFraisEleveViewset(viewsets.ModelViewSet):
@@ -84,9 +107,11 @@ class PaiementFraisMensuelsViewset(viewsets.ModelViewSet):
         annee_scolaire = self.request.query_params.get("annee_scolaire", None)
         classe = self.request.query_params.get("classe", None)
         if annee_scolaire is not None and eleveId is not None:
-            queryset = queryset.filter(anneeAcademique=annee_scolaire, eleve__eleveNumber=eleveId)
+            queryset = queryset.filter(
+                anneeAcademique=annee_scolaire, eleve__eleveNumber=eleveId)
         if annee_scolaire is not None and classe is not None:
-            queryset = queryset.filter(anneeAcademique=annee_scolaire, classe__identifiant=classe)
+            queryset = queryset.filter(
+                anneeAcademique=annee_scolaire, classe__identifiant=classe)
 
         # return queryset.filter(anneeAcademique=annee_scolaire)
         return queryset
@@ -101,17 +126,20 @@ class PaiementAutresFraisViewset(viewsets.ModelViewSet):
         annee_scolaire = self.request.query_params.get("annee_scolaire", None)
         type_frais = self.request.query_params.get("type_frais", None)
         if annee_scolaire is not None and eleveId is not None:
-            queryset = queryset.filter(anneeAcademique=annee_scolaire, eleve__eleveNumber=eleveId)
+            queryset = queryset.filter(
+                anneeAcademique=annee_scolaire, eleve__eleveNumber=eleveId)
         if annee_scolaire is not None and type_frais is not None:
-            queryset = queryset.filter(anneeAcademique=annee_scolaire, typeFrais__frais=type_frais)
+            queryset = queryset.filter(
+                anneeAcademique=annee_scolaire, typeFrais__frais=type_frais)
 
         # return queryset.filter(anneeAcademique=annee_scolaire)
         return queryset
 
+
 class PaiementInscriptionReinscriptionSerializer(serializers.ModelSerializer):
     class Meta:
-        model= PaiementInscriptionReinscription
-        fields= "__all__"
+        model = PaiementInscriptionReinscription
+        fields = "__all__"
 
 
 class PaiementInscriptionReinscriptionViewset(viewsets.ModelViewSet):
@@ -119,10 +147,27 @@ class PaiementInscriptionReinscriptionViewset(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = PaiementInscriptionReinscription.objects.all()
-        anneeScolaire = self.request.query_params.get("annee_scolaire" ,None)
+        anneeScolaire = self.request.query_params.get("annee_scolaire", None)
         classe = self.request.query_params.get("classe", None)
         if anneeScolaire is not None:
-            queryset = queryset.filter(anneeAcademique=anneeScolaire)
+            queryset = queryset.filter(AnneeScolaire=anneeScolaire)
             if classe is not None:
                 queryset = queryset.filter(classe=classe)
+        return queryset
+
+
+class PaiementFraisSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PaiementEveryFrais
+        fields = '__all__'
+
+
+class PaiementEveryFraisViewset(viewsets.ModelViewSet):
+    serializer_class = PaiementFraisSerializer
+
+    def get_queryset(self):
+        queryset = PaiementEveryFrais.objects.all()
+        eleveId = self.request.query_params.get("id", None)
+        if eleveId is not None:
+            queryset = queryset.filter(eleve__eleveNumber=eleveId)
         return queryset

@@ -25,7 +25,7 @@ class EleveViewset(viewsets.ModelViewSet):
         queryset = Eleve.objects.all()
         anneeScolaire = self.request.query_params.get("annee_scolaire", None)
         if anneeScolaire is not None:
-            queryset = queryset.filter(anneeScolaire=anneeScolaire)
+            queryset = queryset.filter(AnneeScolaire=anneeScolaire)
         return queryset
 
 #permission_classes = [permissions.IsAuthenticated]
