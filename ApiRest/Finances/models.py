@@ -70,12 +70,11 @@ class ConfigEcolage(TimeStamp):
     montant = models.FloatField(null=False)
     AnneeScolaire = models.ForeignKey(
         AnneeScolaire, on_delete=models.DO_NOTHING, related_name='ecolage_annnee')
-    classe = models.CharField(null=False, default='')
+    classe = models.OneToOneField(
+        Classe, related_name='ecolage_classe', unique=True, null=True, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return f'{self.typeFrais} => {self.montant}'
-
-
 
     class Meta:
         db_table = 'Ecolage'

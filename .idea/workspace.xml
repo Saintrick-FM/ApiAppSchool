@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -10,26 +13,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a5a19fa-79cd-4ef7-975c-388fe9da8291" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0006_configfraisinscriptionreinscription_periodepaiement.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0007_auto_20210911_1216.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0008_auto_20210911_1506.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0009_configdepenses.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0010_auto_20210912_0510.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0011_paiementeveryfrais.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0012_paiementeveryfrais_anneescolaire.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Finances/migrations/0015_paiementeveryfrais_moisasolver.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ApiRest/Inscriptions/migrations/0002_auto_20210914_0506.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Ecole/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Ecole/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Finances/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Finances/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Finances/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Finances/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Finances/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Finances/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Finances/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Finances/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Inscriptions/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ApiRest/Inscriptions/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ApiRest/Inscriptions/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../db.sqlite3" afterDir="false" />
-    </list>
+    <list default="true" id="6a5a19fa-79cd-4ef7-975c-388fe9da8291" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,7 +42,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../ApiRest/Finances" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -121,6 +105,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -148,35 +133,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="421" y="166" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1627381455286">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="421" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1627381455286" />
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1624594135066">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1624594135066" />
-    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1624594135065">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1624594135065" />
-    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1624594135065">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1624594135065" />
-    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1624594135066">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1624594135066" />
-    <state x="288" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1629019814861">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="288" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1629019814861" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1629848325423">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1629848325423" />
   </component>
 </project>

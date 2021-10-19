@@ -168,6 +168,10 @@ class PaiementEveryFraisViewset(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = PaiementEveryFrais.objects.all()
         eleveId = self.request.query_params.get("id", None)
+        typeFrais = self.request.query_params.get("typeFrais", None)
         if eleveId is not None:
             queryset = queryset.filter(eleve__eleveNumber=eleveId)
+        if typeFrais is not None:
+            queryset = queryset.filter(typeFrais__frais=typeFrais)
+
         return queryset

@@ -1,7 +1,6 @@
 from django.db import models
 from datetime import date
 from ApiRest.Utils.models import TimeStamp
-from ApiRest.Finances.models import ConfigEcolage
 
 CYCLE = (
     ('Garderie', 'Garderie'),
@@ -187,9 +186,9 @@ class Classe(TimeStamp):
     inscrits = models.IntegerField(null=True, editable=False)
     # enseignants_affecte = models.ManyToManyField(
     #     Enseignant, related_name='classe_enseignant')
-    scolarite= models.OneToOneField(
-        ConfigEcolage, related_name='ecolage_classe',  help_text="Frais à payer mensuellement Eg: 8000F", unique=True, on_delete=models.DO_NOTHING)
 
+    scolarite = models.CharField(
+        help_text="Frais à payer mensuellement Eg: 8000F", null=True, max_length=50)
     cycle = models.ForeignKey(
         Cycle, related_name='classe_cycle', on_delete=models.DO_NOTHING)
     anneeScolaire = models.ForeignKey(
@@ -198,8 +197,6 @@ class Classe(TimeStamp):
     def __str__(self):
         return 'Classe {}'.format(self.identifiant)
 
-    def save(self, *args, **kwargs):
-        self.scolarite= self.cl
 
 
 class Matiere(TimeStamp):

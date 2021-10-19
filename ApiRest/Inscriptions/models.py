@@ -56,7 +56,7 @@ class Eleve(TimeStamp):
     updatedAt = models.DateTimeField(
         auto_now=True, db_column='updated_at', editable=False)
     classe = models.ForeignKey(
-        Classe, on_delete=models.CASCADE, related_name="eleve")
+        Classe, on_delete=models.DO_NOTHING, related_name="eleve")
     redoublant = models.CharField(max_length=25,
                                   choices=STATUT, null=False, default=STATUT[0])
     AnneeScolaire = models.ForeignKey(
