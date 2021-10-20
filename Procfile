@@ -1,1 +1,1 @@
-web: gunicorn ApiAppSchool.wsgi --log-file -
+web: gunicorn ApiAppSchool.wsgi
