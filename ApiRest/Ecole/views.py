@@ -10,14 +10,16 @@ from rest_framework.response import Response
 from rest_framework import status
 
 
-from .models import Ecole, Site, Classe, Matiere, Enseignant, AnneeScolaire,Cycle
+from .models import Ecole, Site, Classe, Matiere, Enseignant, AnneeScolaire, Cycle
 from ApiRest.Finances.models import ConfigEcolage
 from rest_framework.permissions import DjangoModelPermissions
+
 
 class AnneeScolaireSerializer(serializers.ModelSerializer):
     class Meta:
         model = AnneeScolaire
         fields = '__all__'
+
 
 class AnneeScolaireViewSet(viewsets.ModelViewSet):
     queryset = AnneeScolaire.objects.all()
@@ -30,6 +32,7 @@ class CycleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cycle
         fields = '__all__'
+
 
 class CycleViewSet(viewsets.ModelViewSet):
     queryset = Cycle.objects.all()
@@ -49,7 +52,6 @@ class EcoleViewSet(viewsets.ModelViewSet):
     serializer_class = EcoleSerializer
     authentication_classes = []
     permission_classes = [permissions.AllowAny]
-
 
 
 class SiteSerializer(serializers.ModelSerializer):
@@ -74,6 +76,7 @@ class ClasseViewSet(viewsets.ModelViewSet):
     queryset = Classe.objects.all()
     serializer_class = ClasseSerializer
 
+
 """
     frais_ecolages = ConfigEcolage.objects.all()
     for ecolage in frais_ecolages:
@@ -83,12 +86,13 @@ class ClasseViewSet(viewsets.ModelViewSet):
 
 """
 
+
 class EnseignantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Enseignant
-        fields = ['enseignant_numero','nom','civilite','date_naissance','lieu_naissance',
-                  'situationSociale','nationalite','adresse','telephone','email','matiereEnseigne',
-                  'classesOccupees','modePaiement', 'intituleCompte', 'numeroCompteBancaire', 'numeroCnss', 'enseigneAu',
+        fields = ['enseignant_numero', 'nom', 'civilite', 'date_naissance', 'lieu_naissance',
+                  'situationSociale', 'nationalite', 'adresse', 'telephone', 'email', 'matiereEnseigne',
+                  'classesOccupees', 'modePaiement', 'intituleCompte', 'numeroCompteBancaire', 'numeroCnss', 'enseigneAu',
                   'dateEmbauche', 'modifieLe', 'get_asbolute_url']
 
 
@@ -100,7 +104,7 @@ class EnseignantViewSet(viewsets.ModelViewSet):
 class MatiereSerializer(serializers.ModelSerializer):
     class Meta:
         model = Matiere
-        fields= '__all__'
+        fields = '__all__'
 
         # fields = ['id','nomMatiere', 'codeMatiere','pluriProf', 'matiereDeBase',
         #           'seanceParSemaine', 'coefficient', 'groupeMatiere', 'classAssocie']
@@ -114,6 +118,7 @@ class MatiereViewSet(viewsets.ModelViewSet):
     queryset = Matiere.objects.all()
     serializer_class = MatiereSerializer
     #permission_classes = [permissions.DjangoModelPermissions]
+
 
 """
 

@@ -95,15 +95,23 @@ def anneeScolaire(annee=now):
 
 
 class AnneeScolaire(TimeStamp):
-    anneeScolaire= models.CharField('Annee scolaire actuelle', default=anneeScolaire, max_length=50, primary_key=True)
-    ouvertureAdministratif = models.DateField('Date d\'Ouverture administratif', max_length=50, null=False)
-    debutInscriptions = models.DateField('Début d\'inscriptions', max_length=50, null=False)
-    rentreeScolaire= models.DateField('Date rentree scolaire', max_length=50, null=False)
-    conges1erTrimestre = models.CharField('Période congés du 1er trimestre', max_length=50, null=True)
-    conges2eTrimestre = models.CharField('Période congés du 2e trimestre', max_length=50, null=True)
-    debutVacancesScolaire = models.DateField(verbose_name="Début de vacances pour élèves",null=True)
-    debutVacancesAdministratives = models.DateField(verbose_name="Début de vacances du personnel",null=True)
-    statut= models.CharField(max_length=50,null=False)
+    anneeScolaire = models.CharField(
+        'Annee scolaire actuelle', max_length=50, primary_key=True)
+    ouvertureAdministratif = models.DateField(
+        'Date d\'Ouverture administratif', max_length=50, null=False)
+    debutInscriptions = models.DateField(
+        'Début d\'inscriptions', max_length=50, null=False)
+    rentreeScolaire = models.DateField(
+        'Date rentree scolaire', max_length=50, null=False)
+    conges1erTrimestre = models.CharField(
+        'Période congés du 1er trimestre', max_length=50, null=True)
+    conges2eTrimestre = models.CharField(
+        'Période congés du 2e trimestre', max_length=50, null=True)
+    debutVacancesScolaire = models.DateField(
+        verbose_name="Début de vacances pour élèves", null=True)
+    debutVacancesAdministratives = models.DateField(
+        verbose_name="Début de vacances du personnel", null=True)
+    statut = models.CharField(max_length=50, null=False)
 
     def __str__(self):
         return f'Annee Scolaire {self.anneeScolaire}'
@@ -115,7 +123,7 @@ class AnneeScolaire(TimeStamp):
 class Ecole(TimeStamp):
     nom = models.CharField(max_length=100, null=False, unique=True)
     nbreSites = models.IntegerField('Nbre de sites', null=False, default=2)
-    devise= models.CharField(max_length=100, null=False)
+    devise = models.CharField(max_length=100, null=False)
     programme = models.CharField(max_length=100, null=False)
     ville = models.CharField(max_length=200, null=False)
     adresse = models.CharField(max_length=200, null=False)
@@ -124,15 +132,16 @@ class Ecole(TimeStamp):
     # siteInternet = models.CharField('Site internet', null=True, max_length=200)
     prefixmatricule = models.CharField(
         'Préfix matricule', max_length=200, null=False)
-    vagues= models.CharField(max_length=50, default="Matin", null=False)
+    vagues = models.CharField(max_length=50, default="Matin", null=False)
 
-    garderie= models.BooleanField(null=False)
-    nbreSalleGarderie = models.IntegerField('Nbre de salles en garderie', default=0, null=False)
+    garderie = models.BooleanField(null=False)
+    nbreSalleGarderie = models.IntegerField(
+        'Nbre de salles en garderie', default=0, null=False)
 
     heuresMatin = models.CharField(max_length=50, null=False)
-    recreMatin= models.CharField(max_length=50, null=False)
+    recreMatin = models.CharField(max_length=50, null=False)
     recreMidi = models.CharField(max_length=50, null=True)
-    heuresMidi= models.CharField(max_length=50, null=True)
+    heuresMidi = models.CharField(max_length=50, null=True)
 
     def __str__(self):
         return 'Ecole {}'.format(self.nom)
@@ -190,13 +199,12 @@ class Classe(TimeStamp):
     scolarite = models.CharField(
         help_text="Frais à payer mensuellement Eg: 8000F", null=True, max_length=50)
     cycle = models.ForeignKey(
-        Cycle, related_name='classe_cycle', on_delete=models.DO_NOTHING)
+        Cycle, related_name='classeCycle', on_delete=models.DO_NOTHING)
     anneeScolaire = models.ForeignKey(
         AnneeScolaire, on_delete=models.DO_NOTHING, related_name='classe_annee_scolaire', null=True, verbose_name="Année Scolaire")
 
     def __str__(self):
         return 'Classe {}'.format(self.identifiant)
-
 
 
 class Matiere(TimeStamp):
@@ -240,26 +248,27 @@ class Enseignant(TimeStamp):
     date_naissance = models.CharField(max_length=50, help_text='Tappez juste la date de Naissance Eg: 11-Mai-1995',
                                       null=False)
     lieu_naissance = models.CharField(
-                    max_length=50, default='Brazzaville', db_column="lieuDeNaissance", blank=True)
-    situationSociale = models.CharField('Situation sociale',max_length=50, choices=STATUT_SOCIAL)
+        max_length=50, default='Brazzaville', db_column="lieuDeNaissance", blank=True)
+    situationSociale = models.CharField(
+        'Situation sociale', max_length=50, choices=STATUT_SOCIAL)
     nationalite = models.CharField(
-                    max_length=255, default='Congolaise', null=False)
+        max_length=255, default='Congolaise', null=False)
     adresse = models.CharField(max_length=255, null=False)
     telephone = models.CharField(max_length=15, null=False, unique=True)
     email = models.EmailField(max_length=255, null=True, blank=True)
 
     matiereEnseigne = models.ManyToManyField(
-                    Matiere, default='', related_name='enseignant_matieres', verbose_name='Matière(s) enseignée(s)')
+        Matiere, default='', related_name='enseignant_matieres', verbose_name='Matière(s) enseignée(s)')
     classesOccupees = models.ManyToManyField(
-                    Classe, related_name='enseignant_classes', verbose_name="Classe(s) à enseigner")
+        Classe, related_name='enseignant_classes', verbose_name="Classe(s) à enseigner")
     modePaiement = models.CharField(
-                    'Mode de paiement', max_length=100, choices=MODE_PAIEMENT, null=False, default=MODE_PAIEMENT[0])
+        'Mode de paiement', max_length=100, choices=MODE_PAIEMENT, null=False, default=MODE_PAIEMENT[0])
     intituleCompte = models.CharField(
-                    max_length=250,  blank=True, help_text="Ecrire le nom du compte bancaire de l'enseignant", null=True)
+        max_length=250,  blank=True, help_text="Ecrire le nom du compte bancaire de l'enseignant", null=True)
     numeroCompteBancaire = models.CharField("Numéro compte bancaire",
-                    max_length=250,  blank=True, null=True)
+                                            max_length=250,  blank=True, null=True)
     numeroCnss = models.CharField('Numéro CNSS',
-                                   max_length=100,  blank=True, null=True)
+                                  max_length=100,  blank=True, null=True)
     enseigneAu = models.CharField(
         "Enseigne au cycle :", max_length=30, default=CATEGORIE_ENSEIGNANT[1], choices=CATEGORIE_ENSEIGNANT, null=False)
     anneeScolaire = models.ForeignKey(

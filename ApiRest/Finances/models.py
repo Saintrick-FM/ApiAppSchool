@@ -74,7 +74,7 @@ class ConfigEcolage(TimeStamp):
         Classe, related_name='ecolage_classe', unique=True, null=True, on_delete=models.DO_NOTHING)
 
     def __str__(self):
-        return f'{self.typeFrais} => {self.montant}'
+        return f'{self.identifiant} => {self.montant}'
 
     class Meta:
         db_table = 'Ecolage'
