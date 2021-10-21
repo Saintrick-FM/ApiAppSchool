@@ -198,8 +198,7 @@ class Classe(TimeStamp):
 
     scolarite = models.CharField(
         help_text="Frais à payer mensuellement Eg: 8000F", null=True, max_length=50)
-    cycle = models.ForeignKey(
-        Cycle, related_name='classeCycle', on_delete=models.DO_NOTHING)
+    cycle = models.CharField(null=False, max_length=50)
     anneeScolaire = models.ForeignKey(
         AnneeScolaire, on_delete=models.DO_NOTHING, related_name='classe_annee_scolaire', null=True, verbose_name="Année Scolaire")
 
