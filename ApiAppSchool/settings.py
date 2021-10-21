@@ -14,22 +14,19 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Build paths inside the project like this: BASE_DIR/subdir
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'hv3f^u-lazsw(2-n$b9(eu0%*(7byz0%k$0bgk@=lwjafg2-7$'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -168,9 +165,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-# PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = '/static/'
 django_heroku.settings(locals())
 
-# STATIC_ROOT = BASE_DIR / 'staticfiles'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# Extra places for collectstatic to find static files.
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
