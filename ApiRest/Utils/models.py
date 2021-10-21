@@ -4,6 +4,7 @@ from django.db import models
 
 
 class TimeStamp(models.Model):
+
     cree_le = models.DateTimeField(
         auto_now_add=True, editable=False, verbose_name='créé_le')
     modifie_le = models.DateTimeField(

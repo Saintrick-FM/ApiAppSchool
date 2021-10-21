@@ -60,7 +60,8 @@ class ConfigurationFraisEleve(TimeStamp):
         db_table = 'Configuration_Frais_Eleve'
 
 
-class ConfigEcolage(TimeStamp):
+class ConfigEcolage(models.Model):
+
     identifiant = models.CharField(
         'Intitulé du frais', max_length=100, default="Frais mensuels")
     periodePaiement = models.CharField(
@@ -70,14 +71,18 @@ class ConfigEcolage(TimeStamp):
     montant = models.FloatField(null=False)
     AnneeScolaire = models.ForeignKey(
         AnneeScolaire, on_delete=models.DO_NOTHING, related_name='ecolage_annnee')
-    classe = models.OneToOneField(
-        Classe, related_name='ecolage_classe', unique=True, null=True, on_delete=models.DO_NOTHING)
+    classe = models.CharField(max_length=100, null=False)
+
+    cree_le = models.DateTimeField(
+        auto_now_add=True, editable=False, verbose_name='créé_le')
+    modifie_le = models.DateTimeField(
+        'modifié_le', auto_now=True, editable=False)
 
     def __str__(self):
         return f'{self.identifiant} => {self.montant}'
 
     class Meta:
-        db_table = 'Ecolage'
+        db_table = 'Config_Ecolage'
 
 
 class ConfigAutresFrais(TimeStamp):
